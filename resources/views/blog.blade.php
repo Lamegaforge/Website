@@ -426,10 +426,7 @@
   </footer>
   <!-- /footer -->
 
-  <!-- vendor js -->
+  <!-- app js -->
   <script src="{{ asset('js/app.js') }}"></script>
-
-  <!-- theme js -->
-  <script src="js/theme.js"></script>
 </body>
 </html>
