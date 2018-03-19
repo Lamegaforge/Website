@@ -22,3 +22,24 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Models\VideoChannel::class, function (Faker\Generator $faker) {
+    return [
+        'name' =>  $faker->name,
+        'slug_name' =>  $faker->slug,
+        'youtube_id' =>  $faker->name,
+        'description' => $faker->text,
+    ];
+});
+
+$factory->define(App\Models\Video::class, function (Faker\Generator $faker) {
+    return [
+        'youtube_id' => $faker->name,
+        'title' => $faker->name,
+        'description' => $faker->text,
+        'view_count' => $faker->numberBetween(1000, 5000),
+        'like_count' => $faker->numberBetween(10, 200),
+        'online' => $faker->boolean ,
+        'published_at' => $faker->dateTime('now'),
+    ];
+});
