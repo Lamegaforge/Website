@@ -2,11 +2,13 @@
 
 namespace App\Services;
 
+use App\Exceptions\InvalidApiResponseException;
+
 class VideoService
 {
-    public function findWithApi($id)
+    public function findWithApi($youtubeId)
     {
-        $apiResponse = app('Api\Youtube')->getVideoInfo($id);
+        $apiResponse = app('Api\Youtube')->getVideoInfo($youtubeId);
 
         if (! $apiResponse) {
             throw new InvalidApiResponseException();
@@ -17,9 +19,9 @@ class VideoService
         return new Entities\Video($formatedResponse);
     }
     
-    public function getLastByChannelWithApi($id, $limit = 5)
+    public function getLastByChannelWithApi($youtubeChannelId, $limit = 5)
     {
-        $apiResponseList = app('Api\Youtube')->listChannelVideos($id, $limit, 'date');
+        $apiResponseList = app('Api\Youtube')->listChannelVideos($youtubeChannelId, $limit, 'date');
 
         if (! $apiResponseList) {
             throw new InvalidApiResponseException();
