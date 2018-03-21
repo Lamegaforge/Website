@@ -4,13 +4,32 @@ namespace App\Services\Videos;
 
 class VideoService
 {
-    public function callApiWithId($id)
+    public function findWithApi($id)
     {
-        $result = app('Api\Youtube')->getVideoInfo($id);
+        $apiVideo = app('Api\Youtube')->getVideoInfo($id);
 
-        return new Responsables\Video($result);
+        if (! $apiVideo) {
+            throw new InvalidApiResponseException();
+        }
+
+        $this->formatResponseApi($apiVideo);
+
+        // return new Responsables\Video($result);
     }
     
+    public function getLastByChannelWithApi($id, $limit = 5)
+    {
+        $apiVideos = app('Api\Youtube')->getVideoInfo($id);
+
+        if (! $apiVideos) {
+            throw new InvalidApiResponseException();
+        }
+
+        return array_map(function($apiVideo){
+            return $this->formatResponseApi($apiVideo);
+        }, $apiVideos);
+    }
+
     protected function formatResponseApi($video)
     {
         return [
