@@ -19,7 +19,7 @@ class VideoService
     
     public function getLastByChannelWithApi($id, $limit = 5)
     {
-        $apiResponseList = app('Api\Youtube')->getVideoInfo($id);
+        $apiResponseList = app('Api\Youtube')->listChannelVideos($id, $limit, 'date');
 
         if (! $apiResponseList) {
             throw new InvalidApiResponseException();
