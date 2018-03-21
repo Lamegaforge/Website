@@ -39,14 +39,14 @@ class VideoService
     protected function formatResponseApi($response)
     {
         return [
-            'id' => $response->id,
-            'channel_id' => $response->snippet->channelId,
+            'youtube_id' => $response->id,
+            'channel_video_id' => $response->snippet->channelId,
             'title' => $response->snippet->title,
             'published_at' => $response->snippet->publishedAt,
             'description' => $response->snippet->description,
-            'view' => $response->statistics->viewCount,
-            'like' => $response->statistics->likeCount,
-            'dislike' => $response->statistics->dislikeCount,
+            'view_count' => $response->statistics->viewCount,
+            'like_count' => $response->statistics->likeCount,
+            'dislike_count' => $response->statistics->dislikeCount,
         ];
     }
 }
