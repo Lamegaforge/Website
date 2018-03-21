@@ -1,5 +1,5 @@
-
 <?php
+
 namespace App\Services\Entities;
 
 use App\Services\Contracts\Entity;
