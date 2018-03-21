@@ -6,28 +6,32 @@ class VideoService
 {
     public function findWithApi($id)
     {
-        $apiVideo = app('Api\Youtube')->getVideoInfo($id);
+        $apiResponse = app('Api\Youtube')->getVideoInfo($id);
 
-        if (! $apiVideo) {
+        if (! $apiResponse) {
             throw new InvalidApiResponseException();
         }
 
-        $this->formatResponseApi($apiVideo);
+        $formatedResponse = $this->formatResponseApi($apiResponse);
 
-        // return new Responsables\Video($result);
+        return new Entities\Video($formatedResponse);
     }
     
     public function getLastByChannelWithApi($id, $limit = 5)
     {
-        $apiVideos = app('Api\Youtube')->getVideoInfo($id);
+        $apiResponseList = app('Api\Youtube')->getVideoInfo($id);
 
-        if (! $apiVideos) {
+        if (! $apiResponseList) {
             throw new InvalidApiResponseException();
         }
 
-        return array_map(function($apiVideo){
-            return $this->formatResponseApi($apiVideo);
-        }, $apiVideos);
+        return array_map(function($apiResponse){
+
+            $formatedResponse = $this->formatResponseApi($apiResponse);
+
+            return new Entities\Video($formatedResponse);
+
+        }, $apiResponseList);
     }
 
     protected function formatResponseApi($video)
@@ -38,11 +42,11 @@ class VideoService
             'title' => $video->snippet->title,
             'published_at' => $video->snippet->publishedAt,
             'description' => $video->snippet->description,
-            'statistics' => [
-                'view' => $video->statistics->viewCount,
-                'like' => $video->statistics->likeCount,
-                'dislike' => $video->statistics->dislikeCount,
-            ]
+            'view' => $video->statistics->viewCount,
+            'like' => $video->statistics->likeCount,
+            'dislike' => $video->statistics->dislikeCount,
         ];
     }
 }
+
+
