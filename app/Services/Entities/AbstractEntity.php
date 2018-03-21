@@ -1,6 +1,6 @@
 
 <?php
-namespace App\Services\Videos\Entities;
+namespace App\Services\Entities;
 
 use App\Services\Contracts\Entity;
 

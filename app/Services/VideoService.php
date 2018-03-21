@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Videos;
+namespace App\Services;
 
 class VideoService
 {
@@ -48,5 +48,3 @@ class VideoService
         ];
     }
 }
-
-
