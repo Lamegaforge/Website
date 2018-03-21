@@ -34,17 +34,17 @@ class VideoService
         }, $apiResponseList);
     }
 
-    protected function formatResponseApi($video)
+    protected function formatResponseApi($response)
     {
         return [
-            'id' => $video->id,
-            'channel_id' => $video->snippet->channelId,
-            'title' => $video->snippet->title,
-            'published_at' => $video->snippet->publishedAt,
-            'description' => $video->snippet->description,
-            'view' => $video->statistics->viewCount,
-            'like' => $video->statistics->likeCount,
-            'dislike' => $video->statistics->dislikeCount,
+            'id' => $response->id,
+            'channel_id' => $response->snippet->channelId,
+            'title' => $response->snippet->title,
+            'published_at' => $response->snippet->publishedAt,
+            'description' => $response->snippet->description,
+            'view' => $response->statistics->viewCount,
+            'like' => $response->statistics->likeCount,
+            'dislike' => $response->statistics->dislikeCount,
         ];
     }
 }
