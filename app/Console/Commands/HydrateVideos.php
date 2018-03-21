@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Video;
 use App\Services\VideoService;
 use Illuminate\Console\Command;
+use App\Repositories\VideoRepository;
 use App\Exceptions\InvalidApiResponseException;
 
 class HydrateVideos extends Command
@@ -38,9 +39,9 @@ class HydrateVideos extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(VideoRepository $videoRepository)
     {
-        $videos = Video::all();
+        $videos = $videoRepository->all();
 
         foreach ($videos as $video) {
 
@@ -48,9 +49,7 @@ class HydrateVideos extends Command
                 
                 $videoEntity = app(VideoService::class)->findWithApi($video->youtube_id);
 
-                $video->update($videoEntity->getAttributes());
-
-                $video->save();
+                $videoRepository->update($videoEntity->getAttributes(), $video->id);
 
             } catch (InvalidApiResponseException $e) {
                 logger('hydrate-video : ' . $video->id);
