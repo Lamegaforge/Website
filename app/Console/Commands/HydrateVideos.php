@@ -2,11 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Exceptions;
 use App\Models\Video;
 use App\Services\VideoService;
 use Illuminate\Console\Command;
 use App\Repositories\VideoRepository;
-use App\Exceptions\InvalidApiResponseException;
 
 class HydrateVideos extends Command
 {
@@ -49,10 +49,19 @@ class HydrateVideos extends Command
                 
                 $videoEntity = app(VideoService::class)->findWithApi($video->youtube_id);
 
-                $videoRepository->update($videoEntity->getAttributes(), $video->id);
+                $params['online'] = false;
 
-            } catch (InvalidApiResponseException $e) {
-                logger('hydrate-video : ' . $video->id);
+                if ($videoEntity) {
+
+                    $params['online'] = true;
+
+                    $params = array_merge($videoEntity->getAttributes(), $params)
+                }
+
+                $videoRepository->update($params, $video->id);
+
+            } catch (Exceptions $e) {
+                logger('hydrate-video ' . $video->id . ' : ' . $e->getMessage());
             }
         }
     }
