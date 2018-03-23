@@ -8,7 +8,7 @@ class Video extends Model
 {
     protected $fillable = [
         'youtube_id',
-        'channel_id',
+        'video_channel_id',
         'title',
         'published_at',
         'description',
