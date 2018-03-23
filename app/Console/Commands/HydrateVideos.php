@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Exceptions;
+use Exception;
 use App\Models\Video;
 use App\Services\VideoService;
 use Illuminate\Console\Command;
@@ -41,7 +41,7 @@ class HydrateVideos extends Command
      */
     public function handle(VideoRepository $videoRepository)
     {
-        $videos = $videoRepository->all();
+        $videos = $videoRepository->first();
 
         foreach ($videos as $video) {
 
@@ -55,12 +55,12 @@ class HydrateVideos extends Command
 
                     $params['online'] = true;
 
-                    $params = array_merge($videoEntity->getAttributes(), $params)
+                    $params = array_merge($videoEntity->getAttributes(), $params);
                 }
 
                 $videoRepository->update($params, $video->id);
 
-            } catch (Exceptions $e) {
+            } catch (Exception $e) {
                 logger('hydrate-video ' . $video->id . ' : ' . $e->getMessage());
             }
         }

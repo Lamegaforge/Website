@@ -11,7 +11,7 @@ class VideoService
         $apiResponse = app('Api\Youtube')->getVideoInfo($youtubeId);
 
         if (! $apiResponse) {
-            throw new InvalidApiResponseException();
+            return null;
         }
 
         $formatedResponse = $this->formatResponseApi($apiResponse);
