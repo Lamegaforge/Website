@@ -27,14 +27,14 @@ $factory->define(App\Models\VideoChannel::class, function (Faker\Generator $fake
     return [
         'name' =>  $faker->name,
         'slug_name' =>  $faker->slug,
-        'youtube_id' =>  $faker->name,
+        'hash' =>  $faker->name,
         'description' => $faker->text,
     ];
 });
 
 $factory->define(App\Models\Video::class, function (Faker\Generator $faker) {
     return [
-        'youtube_id' => $faker->name,
+        'hash' => $faker->name,
         'title' => $faker->name,
         'description' => $faker->text,
         'view_count' => $faker->numberBetween(1000, 5000),

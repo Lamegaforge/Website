@@ -17,7 +17,7 @@ class CreateVideoChannelsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('slug_name');
-            $table->integer('youtube_id');
+            $table->integer('hash');
             $table->text('description')->nullable();
             $table->timestamps();
         });

@@ -23,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind("Api\Youtube", function(){
+            return new \Alaouy\Youtube\Youtube(config('api.youtube.key'));
+        });
     }
 }

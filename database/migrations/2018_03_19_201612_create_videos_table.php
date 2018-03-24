@@ -16,7 +16,7 @@ class CreateVideosTable extends Migration
         Schema::create('videos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('video_channel_id')->unsigned();
-            $table->string('youtube_id')->unique();
+            $table->string('hash')->unique();
             $table->string('title');
             $table->string('duration')->nullable();
             $table->text('description');
