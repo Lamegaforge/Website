@@ -41,13 +41,13 @@ class HydrateVideos extends Command
      */
     public function handle(VideoRepository $videoRepository)
     {
-        $videos = $videoRepository->first();
+        $videos = $videoRepository->get();
 
         foreach ($videos as $video) {
 
             try {
                 
-                $videoEntity = app(VideoService::class)->findWithApi($video->youtube_id);
+                $videoEntity = app(VideoService::class)->findWithApi($video->hash);
 
                 $params['online'] = false;
 

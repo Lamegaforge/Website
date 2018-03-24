@@ -2,11 +2,12 @@
 
 namespace App\Console\Commands;
 
-use App\Exceptions;
+use Exceptions;
 use App\Models\Video;
 use App\Services\VideoService;
 use Illuminate\Console\Command;
 use App\Repositories\VideoRepository;
+use App\Repositories\VideoChannelRepository;
 
 class CollectNewVideos extends Command
 {
@@ -47,20 +48,24 @@ class CollectNewVideos extends Command
 
             try {
                 
-                $youtubeIdList = app(VideoService::class)->getAllByChannel($channel->youtube_id);
-
-                $videoEntityList = app(VideoService::class)->getLastByChannelWithApi($channel->youtube_id);
+                $videoEntityList = app(VideoService::class)->getLastByChannelWithApi($channel->hash);
 
                 foreach ($videoEntityList as $videoEntity) {
 
-                    if (! $videoEntity || in_array($videoEntity->youtube_id, $youtubeIdList)) {
+                    $alreadyRegistered = $videoRepository->findWhere(['hash', $videoEntity->hash]);
+
+                    if ($alreadyRegistered->isNotEmpty()) {
                         continue;
                     }
 
-                    $videoRepository->create($videoEntityList->getAttributes());
+                    $attributes = $videoEntity->getAttributes();
+
+                    $attributes['video_channel_id'] = $channel->id;
+
+                    $videoRepository->create($attributes);
                 }
 
-            } catch (Exceptions $e) {
+            } catch (Exception $e) {
                 logger('hydrate-video ' . $video->id . ' : ' . $e->getMessage());
             }
         }

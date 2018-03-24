@@ -5,8 +5,7 @@ namespace App\Services\Entities;
 class Video extends AbstractEntity
 {
     protected $attributes = [
-        'youtube_id' => null,
-        'channel_video_id' => null,
+        'hash' => null,
         'title' => null,
         'published_at' => null,
         'description' => null,
