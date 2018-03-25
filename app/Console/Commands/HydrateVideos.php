@@ -56,6 +56,8 @@ class HydrateVideos extends Command
                     $params['online'] = true;
 
                     $params = array_merge($videoEntity->getAttributes(), $params);
+                    
+                    unset($params['hash']);
                 }
 
                 $videoRepository->update($params, $video->id);
