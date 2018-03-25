@@ -12,9 +12,9 @@ class Video extends Model
         'title',
         'published_at',
         'description',
-        'view',
-        'like',
-        'dislike',
+        'view_count',
+        'like_count',
+        'dislike_count',
     ];	
 
     public function channel()
