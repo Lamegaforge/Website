@@ -2,6 +2,9 @@
 
 namespace App\Services;
 
+use Illuminate\Http\Request;
+use App\Repositories\Criterias;
+use App\Repositories\VideoRepository;
 use App\Exceptions\InvalidApiResponseException;
 
 class VideoService
@@ -60,5 +63,59 @@ class VideoService
             'published_at' => $response->snippet->publishedAt,
             'description' => $response->snippet->description,
         ];
+    }
+
+    public function getOnlineById($id)
+    {
+        $videoRepository = app(VideoRepository::class);
+
+        $videoRepository->pushCriteria(new Criterias\Online());    
+
+        return $videoRepository->find($id);
+    }
+
+    public function getOnlineByCriterias(Request $request)
+    {
+        $videoRepository = app(VideoRepository::class);
+
+        if ($sort = $request->get('sort')) {
+            $videoRepository = $this->addSortCriterias($sort, $videoRepository);
+        }
+
+        if ($search = $request->get('search')) {
+            $videoRepository = $this->addSearchCriterias($search, $videoRepository);
+        }    
+
+        $videoRepository->pushCriteria(new Criterias\Online());    
+
+        return $videoRepository->paginate();
+    }
+
+    protected function addSortCriterias($sort, VideoRepository $videoRepository)
+    {
+        switch ($sort) {
+            case 'rate':
+                $ordering = 'like_count';
+            break;
+            case 'view':
+                $ordering = 'view_count';
+            break;
+            default:
+                $ordering = 'published_at';
+            break;
+        }
+
+        $videoRepository->pushCriteria(new Criterias\OrderBy($ordering));
+
+        return $videoRepository;
+    }
+
+    protected function addSearchCriterias($search, VideoRepository $videoRepository)
+    {
+        $columns = ['title', 'description'];
+
+        $videoRepository->pushCriteria(new Criterias\Search($columns, $search));
+
+        return $videoRepository;
     }
 }

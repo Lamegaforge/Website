@@ -10,6 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::namespace('Guest')->group(function () {
+	Route::prefix('video')->group(function () {
+		Route::get('/', 'VideoController@index');
+		Route::get('{id}', 'VideoController@show');
+	});
+});
 
 Route::get('/', function () {
     return view('blog');

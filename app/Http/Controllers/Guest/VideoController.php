@@ -3,20 +3,22 @@
 namespace App\Http\Controllers\Guest;
 
 use Illuminate\Http\Request;
+use App\Services\VideoService;
+use App\Http\Controllers\Controller;
 use App\Repositories\VideoRepository;
 
 class VideoController extends Controller
 {
-    public function show(Request $request, VideoRepository $videoRepository)
+    public function index(Request $request)
     {
-        $videos = $videoRepository->all();
+        $videos = app(VideoService::class)->getOnlineByCriterias($request);
 
         return view('guest.video.index', ['videos' => $videos]);
-    }    
+    }
 
-    public function show(Request $request, VideoRepository $videoRepository)
+    public function show(Request $request, $id)
     {
-        $video = $videoRepository->find($request->get('id'));
+        $video = app(VideoService::class)->getOnlineById($id);
 
         return view('guest.video.show', ['video' => $video]);
     }
