@@ -79,6 +79,14 @@ class VideoService
         return $this->videoRepository->find($id);
     }
 
+    public function getLastOnline()
+    {
+        $this->videoRepository->pushCriteria(new Criterias\Online());
+        $this->videoRepository->pushCriteria(new Criterias\OrderBy('published_at'));
+
+        return $this->videoRepository->first();        
+    }
+
     public function getOnlineByCriterias(Request $request)
     {
         $this->videoRepository->pushCriteria(new Criterias\OrderBy($request->get('sort')));
