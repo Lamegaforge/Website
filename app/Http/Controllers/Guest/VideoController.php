@@ -21,5 +21,5 @@ class VideoController extends Controller
         $video = app(VideoService::class)->getOnlineById($id);
 
         return view('guest.video.show', ['video' => $video]);
-    }
+    }  
 }
