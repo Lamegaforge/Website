@@ -94,4 +94,13 @@ class VideoService
 
         return $this->videoRepository->paginate();
     }
+
+    public function getOnlineRandom($limit = 5)
+    {
+        $this->videoRepository->pushCriteria(new Criterias\Online());  
+        $this->videoRepository->pushCriteria(new Criterias\Random());  
+        $this->videoRepository->pushCriteria(new Criterias\Limit($limit)); 
+
+        return $this->videoRepository->get(); 
+    }
 }

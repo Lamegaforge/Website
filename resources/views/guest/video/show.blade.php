@@ -18,7 +18,7 @@
     <div class="overlay-light"></div>
     <div class="container">
       <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$video->hash}}?rel=0&amp;amp;autoplay=1&amp;amp;showinfo=0" allowfullscreen></iframe>
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$video->hash}}?rel=0&amp;amp;autoplay=0&amp;amp;showinfo=0" allowfullscreen></iframe>
       </div>
     </div>
   </section>
@@ -33,18 +33,14 @@
                 <a href="profile.html"><img src="/img/user/user-3.jpg" alt=""></a>
               </div>
               <div>
-                <h2 class="post-title">Star Wars Battlefront II: Full Length Reveal Trailer</h2>
+                <h2 class="post-title">{{$video->title}}</h2>
                 <div class="post-meta">
-                  <span><i class="fa fa-clock-o"></i> August 22, 2017 by <a href="profile.html">Clark</a></span>
+                  <span><i class="fa fa-clock-o"></i> {{$video->published_at}} by <a href="profile.html">Clark</a></span>
                   <span><a href="#comments"><i class="fa fa-comment-o"></i> 33 comments</a></span>
                 </div>
               </div>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas elit ante, congue sodales orci ac, ultrices pretium lectus. Maecenas lorem enim, dignissim sed lacus non, feugiat iaculis lorem. Integer eu aliquet diam. Suspendisse fringilla
-              porta justo, vel tempus risus. Ut et enim sit amet libero fermentum aliquam et ut sem.</p>
-            <p>Maecenas viverra, mi non consectetur scelerisque, erat enim interdum erat, imperdiet elementum sapien metus a odio. Sed sapien sapien, tincidunt quis fringilla vel, eleifend tincidunt nunc. Fusce dapibus leo vestibulum, scelerisque metusnec,
-              imperdiet tortor.usce et urna vel neque fermentum consectetur. Donec vel convallis elit. Nulla et odio a magna aliquam varius a vel ex. Cras sed dolor sapien. Sed sit amet interdum sapien, ut laoreet dui. Fusce vulputate consequat mi et
-              rutrum.</p>
+            {{$video->description}}
           </div>
           <div class="post-actions">
             <div class="post-tags">
@@ -231,60 +227,17 @@
             <div class="widget widget-videos">
               <h5 class="widget-title">Recommends</h5>
               <ul class="widget-list">
+              	@foreach($randomVideos as $randomVideo)
                 <li>
                   <div class="widget-img">
-                    <a href="blog-post.html"><img src="https://i1.ytimg.com/vi/4BLkEJu9szM/mqdefault.jpg" alt=""></a>
-                    <span>2:13</span>
+                    <a href="blog-post.html"><img src="https://i1.ytimg.com/vi/{{$randomVideo->hash}}/mqdefault.jpg" alt=""></a>
+                    <span>{{$randomVideo->duration}}</span>
                   </div>
-                  <h4><a href="blog-post.html">Titanfall 2's Trophies Only Have 3 Earned Through Multiplayer</a></h4>
-                  <span><i class="fa fa-clock-o"></i> July 30, 2017</span>
-                  <span><i class="fa fa-eye"></i> 345x</span>
+                  <h4><a href="blog-post.html">{{$randomVideo->title}}</a></h4>
+                  <span><i class="fa fa-clock-o"></i> {{$randomVideo->published_at}}</span>
+                  <span><i class="fa fa-eye"></i> {{$randomVideo->view_count}}</span>
                 </li>
-                <li>
-                  <div class="widget-img">
-                    <a href="blog-post.html"><img src="https://i1.ytimg.com/vi/Kae-JjbLsgA/mqdefault.jpg" alt=""></a>
-                    <span>13:07</span>
-                  </div>
-                  <h4><a href="blog-post.html">Star Wars Battlefront II -- The Story of an Imperial Soldier</a></h4>
-                  <span><i class="fa fa-clock-o"></i> July 29, 2017</span>
-                  <span><i class="fa fa-eye"></i> 1269x</span>
-                </li>
-                <li>
-                  <div class="widget-img">
-                    <a href="blog-post.html"><img src="https://i.ytimg.com/vi/kUKrStkG-hE/mqdefault.jpg" alt=""></a>
-                    <span>5:17</span>
-                  </div>
-                  <h4><a href="blog-post.html">Far Cry 5: Full Length Reveal Trailer</a></h4>
-                  <span><i class="fa fa-clock-o"></i> July 20, 2017</span>
-                  <span><i class="fa fa-eye"></i> 692x</span>
-                </li>
-                <li>
-                  <div class="widget-img">
-                    <a href="blog-post.html"><img src="https://i1.ytimg.com/vi/B6qY-P4eo1Q/mqdefault.jpg" alt=""></a>
-                    <span>2:30</span>
-                  </div>
-                  <h4><a href="blog-post.html">Mafia 3: The Movie (All Cutscenes HD)</a></h4>
-                  <span><i class="fa fa-clock-o"></i> June 13, 2017</span>
-                  <span><i class="fa fa-eye"></i> 1136x</span>
-                </li>
-                <li>
-                  <div class="widget-img">
-                    <a href="blog-post.html"><img src="https://i1.ytimg.com/vi/1Y_DVbmRNhc/mqdefault.jpg" alt=""></a>
-                    <span>2:12</span>
-                  </div>
-                  <h4><a href="blog-post.html">Ghost in the Shell (2017) - Official Trailer</a></h4>
-                  <span><i class="fa fa-clock-o"></i> May 14, 2017</span>
-                  <span><i class="fa fa-eye"></i> 7879x</span>
-                </li>
-                <li>
-                  <div class="widget-img">
-                    <a href="blog-post.html"><img src="https://i1.ytimg.com/vi/PmaZw1xMxBQ/mqdefault.jpg" alt=""></a>
-                    <span>15:38</span>
-                  </div>
-                  <h4><a href="blog-post.html">Call of Duty: Infinite Warfare Gameplay</a></h4>
-                  <span><i class="fa fa-clock-o"></i> March 1, 2017</span>
-                  <span><i class="fa fa-eye"></i> 723x</span>
-                </li>
+              	@endforeach
               </ul>
             </div>
             <!-- /widget post -->

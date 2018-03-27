@@ -19,7 +19,8 @@ class VideoController extends Controller
     public function show(Request $request, $id)
     {
         $video = app(VideoService::class)->getOnlineById($id);
+        $randomVideos = app(VideoService::class)->getOnlineRandom();
 
-        return view('guest.video.show', ['video' => $video]);
+        return view('guest.video.show', ['video' => $video, 'randomVideos' => $randomVideos]);
     }  
 }
