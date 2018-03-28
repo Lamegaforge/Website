@@ -20,6 +20,8 @@ class VideoRepository extends BaseRepository {
 
     public function getOnlineById($id)
     {
+        $this->resetCriteria();
+
         $this->pushCriteria(new Criterias\Online());    
 
         return $this->find($id);
@@ -27,6 +29,8 @@ class VideoRepository extends BaseRepository {
 
     public function getLastOnline()
     {
+        $this->resetCriteria();
+
         $this->pushCriteria(new Criterias\Online());
         $this->pushCriteria(new Criterias\OrderBy('published_at'));
 
@@ -35,6 +39,8 @@ class VideoRepository extends BaseRepository {
 
     public function getOnlineByCriterias(Request $request)
     {
+        $this->resetCriteria();
+
         $this->pushCriteria(new Criterias\OrderBy($request->get('sort')));
 
         if ($search = $request->get('search')) {
@@ -51,6 +57,8 @@ class VideoRepository extends BaseRepository {
 
     public function getOnlineRandom($limit = 5)
     {
+        $this->resetCriteria();
+        
         $this->pushCriteria(new Criterias\Online());  
         $this->pushCriteria(new Criterias\Random());  
         $this->pushCriteria(new Criterias\Limit($limit)); 
