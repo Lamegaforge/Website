@@ -4,19 +4,10 @@ namespace App\Services;
 
 use DateInterval;
 use Illuminate\Http\Request;
-use App\Repositories\Criterias;
-use App\Repositories\VideoRepository;
 use App\Exceptions\InvalidApiResponseException;
 
 class VideoService
 {
-    protected $videoRepository;
-
-    public function __construct(VideoRepository $videoRepository)
-    {
-        $this->videoRepository = $videoRepository;
-    }
-
     public function findWithApi($youtubeId)
     {
         $apiResponse = app('Api\Youtube')->getVideoInfo($youtubeId);
@@ -74,45 +65,5 @@ class VideoService
             'published_at' => $response->snippet->publishedAt,
             'description' => $response->snippet->description,
         ];
-    }
-
-    public function getOnlineById($id)
-    {
-        $this->videoRepository->pushCriteria(new Criterias\Online());    
-
-        return $this->videoRepository->find($id);
-    }
-
-    public function getLastOnline()
-    {
-        $this->videoRepository->pushCriteria(new Criterias\Online());
-        $this->videoRepository->pushCriteria(new Criterias\OrderBy('published_at'));
-
-        return $this->videoRepository->first();        
-    }
-
-    public function getOnlineByCriterias(Request $request)
-    {
-        $this->videoRepository->pushCriteria(new Criterias\OrderBy($request->get('sort')));
-
-        if ($search = $request->get('search')) {
-
-            $columns = ['title', 'description'];
-
-            $this->videoRepository->pushCriteria(new Criterias\Search($columns, $search));        
-        }    
-
-        $this->videoRepository->pushCriteria(new Criterias\Online());    
-
-        return $this->videoRepository->paginate();
-    }
-
-    public function getOnlineRandom($limit = 5)
-    {
-        $this->videoRepository->pushCriteria(new Criterias\Online());  
-        $this->videoRepository->pushCriteria(new Criterias\Random());  
-        $this->videoRepository->pushCriteria(new Criterias\Limit($limit)); 
-
-        return $this->videoRepository->get(); 
     }
 }
