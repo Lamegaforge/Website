@@ -17,9 +17,9 @@ class CreateVideosTable extends Migration
             $table->increments('id');
             $table->integer('video_channel_id')->unsigned();
             $table->string('hash')->unique();
-            $table->string('title');
+            $table->string('title')->nullable();
             $table->string('duration')->nullable();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->integer('view_count')->nullable();
             $table->integer('like_count')->nullable();
             $table->integer('dislike_count')->nullable();

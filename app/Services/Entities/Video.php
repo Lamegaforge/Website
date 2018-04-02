@@ -7,6 +7,7 @@ class Video extends AbstractEntity
     protected $attributes = [
         'hash' => null,
         'title' => null,
+        'duration' => null,
         'published_at' => null,
         'description' => null,
         'view_count' => null,

@@ -47,6 +47,8 @@ class HydrateVideos extends Command
 
             try {
                 
+                $params = [];
+
                 $videoEntity = app(VideoService::class)->findWithApi($video->hash);
 
                 $params['online'] = false;

@@ -21,4 +21,11 @@ class Video extends Model
     {
         return $this->belongsTo(VideoChannel::class);
     }
+
+    public function getPublishedAtAttribute()
+    {
+        $publishedAt = new \Datetime($this->attributes['published_at']);
+
+        return $publishedAt->format('Y-m-d');
+    }
 }
