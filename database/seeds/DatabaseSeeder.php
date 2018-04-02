@@ -11,12 +11,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $hashChannels = ['UCJfprI19VJckLGURSrD3dQQ'];
+        $channels = [
+            [
+                'hash' => 'UCJfprI19VJckLGURSrD3dQQ',
+                'name' => 'Rediff',
+                'slug_name' => 'rediff',
+            ],
+            [
+                'hash' => 'UCv9-pi5_GsoJRFwmzfT6thA',
+                'name' => 'Chaine principale',
+                'slug_name' => 'principale',
+            ],
+        ];
 
-        foreach ($hashChannels as $hash) {
+        foreach ($channels as $channel) {
             
             $videoChannel = factory(\App\Models\VideoChannel::class)->create([
-                'hash' => $hash
+                'name' => $channel['name'],
+                'slug_name' => $channel['slug_name'],
+                'hash' => $channel['hash'],
             ]);
 
             //factory(\App\Models\Video::class, 50)->create([

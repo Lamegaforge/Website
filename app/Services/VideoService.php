@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use DateInterval;
+use Illuminate\Http\Request;
 use App\Exceptions\InvalidApiResponseException;
 
 class VideoService
@@ -19,7 +21,7 @@ class VideoService
         return new Entities\Video($formatedResponse);
     }
 
-    public function getLastByChannelWithApi($youtubeChannelId, $limit = 5)
+    public function getLastByChannelWithApi($youtubeChannelId, $limit = 50)
     {
         $apiResponseList = app('Api\Youtube')->listChannelVideos($youtubeChannelId, $limit, 'date');
 
@@ -38,18 +40,21 @@ class VideoService
 
     protected function formatGetVideoInfoResponse($response)
     {
+        $duration = new DateInterval($response->contentDetails->duration);
+
         return [
             'hash' => $response->id,
             'view_count' => $response->statistics->viewCount,
             'like_count' => $response->statistics->likeCount,
-            'dislike_count' => $response->statistics->dislikeCount,            
+            'dislike_count' => $response->statistics->dislikeCount,  
+            'duration' => $duration->format('%i:%S'),       
         ] + $this->formatBaseResponseApi($response);
     }
 
     protected function formatListChannelVideoResponse($response)
     {
         return [
-            'hash' => $response->id->videoId             
+            'hash' => $response->id->videoId
         ] + $this->formatBaseResponseApi($response);
     }
 
