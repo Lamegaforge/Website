@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <!-- meta -->
   <meta charset="utf-8">
@@ -14,8 +14,8 @@
   <!-- theme css -->
   <link rel="stylesheet" href="/css/theme.min.css">
   <link rel="stylesheet" href="/css/custom.css">
-
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<!-- 
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
 </head>
 <body class="fixed-header">
   <!-- header -->
@@ -330,6 +330,8 @@
 
   <!-- theme js -->
   <script src="/js/theme.min.js"></script>
-  <script src="{{ asset('js/app.js') }}"></script>
+  @yield('scripts')
+<!--   <script src="{{ asset('js/app.js') }}"></script>
+ -->
 </body>
 </html>

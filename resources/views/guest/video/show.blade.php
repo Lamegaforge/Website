@@ -218,7 +218,7 @@
           <div class="sidebar">
             <!-- widget post  -->
             <div class="widget widget-videos">
-              <h5 class="widget-title">Recommends</h5>
+              <h5 class="widget-title">Vidéos recommandées</h5>
               <ul class="widget-list">
               	@foreach($randomVideos as $randomVideo)
                 <li>

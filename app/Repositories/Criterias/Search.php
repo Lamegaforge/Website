@@ -19,7 +19,7 @@ class Search implements CriteriaInterface {
     public function apply($model, RepositoryInterface $repository)
     {
         foreach ($this->columns as $column) {
-            $model->where('column', $this->search);
+            $model->orWhere('column', $this->search);
         }
 
         return $model;

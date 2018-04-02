@@ -24,10 +24,10 @@ class OrderBy implements CriteriaInterface {
     protected function handle()
     {
         switch ($this->sort) {
-            case 'rate':
+            case 'like_count':
                 return 'like_count';
             break;
-            case 'view':
+            case 'view_count':
                 return 'view_count';
             break;
             default:

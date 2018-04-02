@@ -43,6 +43,11 @@ class VideoRepository extends BaseRepository {
 
         $this->pushCriteria(new Criterias\OrderBy($request->get('sort')));
 
+        if ($channel = $request->get('channel')) {
+
+            $this->pushCriteria(new Criterias\Channel($channel));
+        }
+
         if ($search = $request->get('search')) {
 
             $columns = ['title', 'description'];
