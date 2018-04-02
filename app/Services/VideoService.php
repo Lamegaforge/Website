@@ -21,7 +21,7 @@ class VideoService
         return new Entities\Video($formatedResponse);
     }
 
-    public function getLastByChannelWithApi($youtubeChannelId, $limit = 5)
+    public function getLastByChannelWithApi($youtubeChannelId, $limit = 50)
     {
         $apiResponseList = app('Api\Youtube')->listChannelVideos($youtubeChannelId, $limit, 'date');
 
