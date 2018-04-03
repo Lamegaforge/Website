@@ -69,5 +69,17 @@ class VideoRepository extends BaseRepository {
         $this->pushCriteria(new Criterias\Limit($limit)); 
 
         return $this->get(); 
-    }    
+    }   
+
+    public function getOnlineRandomByChannel($slugName, $limit = 5)
+    {
+        $this->resetCriteria();
+        
+        $this->pushCriteria(new Criterias\Channel($slugName));  
+        $this->pushCriteria(new Criterias\Online());  
+        $this->pushCriteria(new Criterias\Random());  
+        $this->pushCriteria(new Criterias\Limit($limit)); 
+
+        return $this->get();         
+    } 
 }
