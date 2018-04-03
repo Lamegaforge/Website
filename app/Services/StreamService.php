@@ -67,6 +67,7 @@ class StreamService
 
         $params = [
             'name' => $result['stream']['channel']['name'],
+            'status' => $result['stream']['channel']['status'],
             'game' => $result['stream']['game'],
         ];
 
