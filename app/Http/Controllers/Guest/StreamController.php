@@ -27,7 +27,7 @@ class StreamController extends Controller
             'hash' => config('stream.rediff_channel_hash')
         ]);
         $videos = $this->video->getLastOnlineRandomByChannel($channel->first->slug_name, 20);
-        $stream = $this->stream->getSelected();
+        $stream = app('App\Services\StreamService')->getSavedStream();
 
         return view('guest.stream.index', [
             'stream' => $stream, 
