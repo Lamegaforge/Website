@@ -26,8 +26,8 @@ class StreamController extends Controller
         $channel = $this->videoChannel->findWhere([
             'hash' => config('stream.rediff_channel_hash')
         ]);
-        $videos = $this->video->getOnlineRandomByChannel($channel->first->slug_name, 20);
-        $stream = $this->stream->getActive();
+        $videos = $this->video->getLastOnlineRandomByChannel($channel->first->slug_name, 20);
+        $stream = $this->stream->getSelected();
 
         return view('guest.stream.index', [
             'stream' => $stream, 
