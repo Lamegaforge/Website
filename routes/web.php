@@ -10,7 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::namespace('Guest')->group(function () {
+
+Route::group(['namespace' => 'Guest'], function () {
 	Route::prefix('video')->group(function () {
 		Route::get('/', 'VideoController@index')->name('video.index');
 		Route::get('{id}', 'VideoController@show')->name('video.show');;
@@ -20,3 +21,7 @@ Route::namespace('Guest')->group(function () {
 Route::get('/', function () {
     return view('blog');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
