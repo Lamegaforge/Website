@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\HydrateVideos::class,
         Commands\CollectNewVideos::class,
+        Commands\ImportVideos::class,
     ];
 
     /**
