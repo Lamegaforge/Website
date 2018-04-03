@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         Commands\HydrateVideos::class,
         Commands\CollectNewVideos::class,
         Commands\ImportVideos::class,
+        Commands\HydrateStream::class,
     ];
 
     /**

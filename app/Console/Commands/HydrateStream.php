@@ -7,7 +7,7 @@ use App\Services\StreamService;
 use Illuminate\Console\Command;
 use App\Repositories\StreamRepository;
 
-class StreamHydrate extends Command
+class HydrateStream extends Command
 {
     /**
      * The name and signature of the console command.
@@ -40,9 +40,9 @@ class StreamHydrate extends Command
      */
     public function handle(StreamRepository $stream)
     {
-        $activeStream = $stream->getActive();
+        $selectedStream = $stream->getSelected();
 
-        $streamEntity = app(StreamService::class)->callTwitchApi($activeStream->slug_name);
+        $streamEntity = app(StreamService::class)->callTwitchApi($selectedStream->slug_name);
 
         if (! $streamEntity) {
             app(StreamService::class)->removeSavedStream();            

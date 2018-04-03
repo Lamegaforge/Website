@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
 
         factory(\App\Models\Stream::class)->create([
             'name' => 'lamegaforgelive',
+            'slug_name' => 'lamegaforgelive',
             'selected' => true,
         ]);
     }

@@ -16,7 +16,7 @@ class StreamRepository extends BaseRepository {
         return "App\\Models\\Stream";
     }
 
-    public function getActive()
+    public function getSelected()
     {
         $this->resetCriteria();
         

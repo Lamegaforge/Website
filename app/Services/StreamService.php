@@ -2,21 +2,14 @@
 
 namespace App\Services;
 
+use Cache;
 use Config;
 use GuzzleHttp\Client;
 use App\Services\Entities;
-use App\Repositories\videoChannelRepository;
 
 class StreamService
 {
     const STREAM_SAVED = 'stream';
-
-    protected $config;
-
-    public function __construct(Config $config)
-    {
-        $this->config = $config['stream'];
-    }
 
     /**
      * @return boolean
@@ -38,7 +31,7 @@ class StreamService
      * @param \App\Services\Entities\Stream;
      * @return void
      */
-    protected function saveStream(Entities\Stream $streamEntity)
+    public function saveStream(Entities\Stream $streamEntity)
     {
         Cache::forever(StreamService::STREAM_SAVED, $streamEntity);
     }
@@ -46,28 +39,37 @@ class StreamService
     /**
      * @return void
      */
-    protected function removeSavedStream()
+    public function removeSavedStream()
     {
         Cache::forget(StreamService::STREAM_SAVED);        
     }
 
+    /**
+     * @param  string $slugName
+     * @return mixed
+     */
     public function callTwitchApi($slugName)
     {
         $client = new Client;
 
-        $link = $this->config['api_url'] .
+        $link = config('api.twitch.url') .
             'streams/' .
             $slugName .
-            '?client_id=' . $this->config['client_id'];
+            '?client_id=' . config('api.twitch.key');
 
         $result = $client->request('GET', $link);
 
-        $result = json_decode($result->getBody(), true);
+        $result = json_decode($result->getBody()->getContents(), true);
 
         if (! $result['stream']) {
             return null;
         }
 
-        return new Entities\Stream($result['stream']);
+        $params = [
+            'name' => $result['stream']['channel']['name'],
+            'game' => $result['stream']['game'],
+        ];
+
+        return new Entities\Stream($params);
     }
 }
