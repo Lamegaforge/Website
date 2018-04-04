@@ -35,7 +35,7 @@
                                 <div class="divider">
                                     <span>Don't have an account?</span>
                                 </div>
-                                <a class="btn btn-secondary btn-block" href="register.html" role="button">Register</a>
+                                <a class="btn btn-secondary btn-block" href="{{ route('register') }}" role="button">Register</a>
                             </form>
                         </div>
                     </div>

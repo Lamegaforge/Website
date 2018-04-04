@@ -14,7 +14,7 @@
   <!-- theme css -->
   <link rel="stylesheet" href="/css/theme.min.css">
   <link rel="stylesheet" href="/css/custom.css">
-<!-- 
+<!--
     <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
 </head>
 <body class="fixed-header">
@@ -25,11 +25,11 @@
         <div class="navbar">
           <div class="navbar-left">
             <a class="navbar-toggle"><i class="fa fa-bars"></i></a>
-            <a href="index.html" class="logo"><img src="/img/logo.png" alt="Gameforest - Game Theme HTML"></a>
+            <a href="{{ url('/') }}" class="logo"><img src="/img/logo.png" alt="Gameforest - Game Theme HTML"></a>
             <nav class="nav">
               <ul>
                 <li class="has-dropdown">
-                  <a href="index.html">Home</a>
+                  <a href="{{ url('/') }}">Home</a>
                   <ul>
                     <li><a href="home-magazine.html">Home Magazine</a></li>
                     <li><a href="home-blog.html">Home Blog</a></li>
@@ -244,9 +244,25 @@
           </div>
           <div class="nav navbar-right">
             <ul>
-              <li class="hidden-xs-down"><a href="login.html">Login</a></li>
-              <li class="hidden-xs-down"><a href="register.html">Register</a></li>
-              <li><a data-toggle="search"><i class="fa fa-search"></i></a></li>
+                <!-- Authentication Links -->
+                @if (Auth::guest())
+                    <li class="hidden-xs-down"><a href="{{ route('login') }}">Login</a></li>
+                    <li class="hidden-xs-down"><a href="{{ route('register') }}">Register</a></li>
+                @else
+                    <li class="hidden-xs-down"><a href="profile.html">{{ Auth::user()->name }}</a></li>
+                    <li>
+                      <a href="{{ route('logout') }}"
+                          onclick="event.preventDefault();
+                                   document.getElementById('logout-form').submit();">
+                          <i class="fa fa-sign-out" style=""></i>
+                      </a>
+
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                          {{ csrf_field() }}
+                      </form>
+                    </li>
+                @endif
+              {{-- <li><a data-toggle="search"><i class="fa fa-search"></i></a></li> --}}
             </ul>
           </div>
         </div>
