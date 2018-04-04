@@ -27,8 +27,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command(Commands\HydrateVideos::class)->hourly();
+        $schedule->command(Commands\CollectNewVideos::class)->everyTenMinutes();
+        $schedule->command(Commands\HydrateStream::class)->everyFiveMinutes();
     }
 
     /**
