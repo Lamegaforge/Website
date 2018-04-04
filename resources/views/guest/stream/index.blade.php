@@ -18,8 +18,7 @@
   <section class="bg-image bg-image-sm section-streamer player p-y-65" style="background-image: url('https://img.youtube.com/vi/oqElIW1mjlQ/maxresdefault.jpg');" data-property="{videoURL:'1GWRDuL04-Q',containment:'self',mute:true,stopMovieOnBlur:false, showControls: false, realfullscreen: true, showYTLogo: false, quality: 'hd1080',autoPlay:true,loop:true,opacity:1}">
     <div class="overlay"></div>
     <div class="container">
-      <div class="video-play video-live" style="background-image: url('https://img.youtube.com/vi/oqElIW1mjlQ/maxresdefault.jpg');background-size: 100%;" data-src="https://player.twitch.tv/?channel=lamegaforgelive&autoplay=true">
-
+      <div class="video-play video-live" style="background-image: url({{$stream->template}});background-size: 100%;" data-src="https://player.twitch.tv/?channel=lamegaforgelive&autoplay=true">
         <div class="embed-responsive embed-responsive-16by9 player" data-property="{videoURL:'28190860416',containment:'self',mute:true,showControls: false, stopMovieOnBlur:false,showYTLogo: false, quality: 'hd1080',autoPlay:true,loop:true,opacity:1}">
           <div class="video-caption">
             <h5><i class="fa fa-circle"></i> Live Now: {{$stream->status}}</h5>
@@ -70,8 +69,6 @@
       <div class="text-center"><a href="videos.html" class="btn btn-primary btn-shadow btn-rounded btn-effect btn-lg m-t-10">Show More</a></div>
     </div>
   </section>
-
-
 
   <!-- /main --> 
 @endsection  
