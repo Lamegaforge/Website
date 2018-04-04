@@ -43,3 +43,13 @@ $factory->define(App\Models\Video::class, function (Faker\Generator $faker) {
         'published_at' => $faker->dateTime('now'),
     ];
 });
+
+$factory->define(App\Models\Stream::class, function (Faker\Generator $faker) {
+    return [
+        'name' =>  $faker->name,
+        'slug_name' =>  $faker->slug,
+        'hash' =>  $faker->name,
+        'description' => $faker->text,
+        'selected' => false,
+    ];
+});
