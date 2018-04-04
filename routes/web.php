@@ -15,6 +15,9 @@ Route::namespace('Guest')->group(function () {
 		Route::get('/', 'VideoController@index')->name('video.index');
 		Route::get('{id}', 'VideoController@show')->name('video.show');;
 	});
+	Route::prefix('stream')->group(function () {
+		Route::get('/', 'StreamController@index')->name('stream.index');
+	});	
 });
 
 Route::get('/', function () {

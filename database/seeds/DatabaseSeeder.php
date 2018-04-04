@@ -31,10 +31,12 @@ class DatabaseSeeder extends Seeder
                 'slug_name' => $channel['slug_name'],
                 'hash' => $channel['hash'],
             ]);
-
-            //factory(\App\Models\Video::class, 50)->create([
-            //    'video_channel_id' => $videoChannel->id,
-            //]);
         }
+
+        factory(\App\Models\Stream::class)->create([
+            'name' => 'lamegaforgelive',
+            'slug_name' => 'lamegaforgelive',
+            'selected' => true,
+        ]);
     }
 }
