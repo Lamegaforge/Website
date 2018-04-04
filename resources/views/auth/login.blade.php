@@ -13,13 +13,13 @@
                         <div class="card-block">
                             <form method="POST" action="{{ route('login') }}">
                                 {{ csrf_field() }}
-                                <div class="form-group input-icon-left m-b-10{{ $errors->has('username') ? ' has-error' : '' }}"">
+                                <div class="form-group input-icon-left m-b-10{{ $errors->has('name') ? ' has-error' : '' }}"">
                                     <i class="fa fa-user"></i>
-                                    <input type="text" class="form-control form-control-secondary" placeholder="Username" name="username" value="{{ old('username') }}" required autofocus>
+                                    <input type="text" class="form-control form-control-secondary" placeholder="Identifiant" name="name" value="{{ old('name') }}" required autofocus>
                                 </div>
                                 <div class="form-group input-icon-left m-b-15{{ $errors->has('password') ? ' has-error' : '' }}">
                                     <i class="fa fa-lock"></i>
-                                    <input type="password" class="form-control form-control-secondary" placeholder="Password" name="password" required>
+                                    <input type="password" class="form-control form-control-secondary" placeholder="Mot de passe" name="password" required>
                                     @if ($errors->has('password'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('password') }}</strong>
