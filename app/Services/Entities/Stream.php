@@ -8,5 +8,6 @@ class Stream extends AbstractEntity
         'name' => null,
         'status' => null,
         'game' => null,
+        'template' => null,
     ];
 }

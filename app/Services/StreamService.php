@@ -94,12 +94,27 @@ class StreamService
             return null;
         }
 
-        $params = [
+        $params = $this->formatApiResponse($result);
+
+        return new Entities\Stream($params);
+    }
+
+    /**
+     * @param  array  $result
+     * @return array
+     */
+    protected function formatApiResponse(array $result)
+    {
+        $template = $result['stream']['preview']['template'];
+
+        $template = str_replace('{width}', 1280, $template);
+        $template = str_replace('{height}', 720, $template);
+
+        return [
             'name' => $result['stream']['channel']['name'],
             'status' => $result['stream']['channel']['status'],
             'game' => $result['stream']['game'],
+            'template' => $template,
         ];
-
-        return new Entities\Stream($params);
     }
 }

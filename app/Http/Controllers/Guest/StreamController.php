@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Guest;
 
 use Illuminate\Http\Request;
+use App\Services\StreamService;
 use App\Http\Controllers\Controller;
 use App\Repositories\VideoRepository;
 use App\Repositories\StreamRepository;
@@ -27,7 +28,7 @@ class StreamController extends Controller
             'hash' => config('stream.rediff_channel_hash')
         ]);
         $videos = $this->video->getLastOnlineRandomByChannel($channel->first->slug_name, 20);
-        $stream = app('App\Services\StreamService')->getSavedStream();
+        $stream = app(StreamService::class)->getSavedStream();
 
         return view('guest.stream.index', [
             'stream' => $stream, 
