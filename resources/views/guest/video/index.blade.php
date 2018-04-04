@@ -12,6 +12,9 @@
 @endsection
 
 @section('content')  
+
+  @include('guest.stream.partials.alert')
+
   <!-- main -->
   <section class="bg-image" style="background-image: url('https://img.youtube.com/vi/{{$lastVideo->hash}}/maxresdefault.jpg');">
     <div class="overlay"></div>
