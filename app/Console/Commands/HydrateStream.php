@@ -38,17 +38,8 @@ class HydrateStream extends Command
      *
      * @return mixed
      */
-    public function handle(StreamRepository $stream)
+    public function handle()
     {
-        $selectedStream = $stream->getSelected();
-
-        $streamEntity = app(StreamService::class)->callTwitchApi($selectedStream->slug_name);
-
-        if (! $streamEntity) {
-            app(StreamService::class)->removeSavedStream();            
-            return;
-        }
-
-        app(StreamService::class)->saveStream($streamEntity);
+        app(StreamService::class)->refreshSavedStream();
     }
 }

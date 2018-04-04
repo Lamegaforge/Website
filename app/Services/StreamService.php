@@ -4,19 +4,50 @@ namespace App\Services;
 
 use Cache;
 use Config;
-use GuzzleHttp\Client;
 use App\Services\Entities;
+use GuzzleHttp\ClientInterface;
+use App\Repositories\StreamRepository;
 
 class StreamService
 {
     const STREAM_SAVED = 'stream';
+
+    protected $stream;
+    protected $client;
+    protected $cache;
+    protected $config;
+
+    public function __construct(StreamRepository $stream, ClientInterface $client, $cache, array $config)
+    {
+        $this->stream = $stream;
+        $this->client = $client;
+        $this->cache = $cache;
+        $this->config = $config;
+    }
+
+    /**
+     * @return void
+     */
+    public function refreshSavedStream()
+    {
+        $selectedStream = $this->stream->getSelected();
+
+        $streamEntity = $this->callTwitchApi($selectedStream->slug_name);
+
+        if (! $streamEntity) {
+            $this->removeSavedStream();
+            return;
+        }
+
+        $this->saveStream($streamEntity);
+    }
 
     /**
      * @return boolean
      */
     public function isOnline()
     {
-        return Cache::has(StreamService::STREAM_SAVED);
+        return $this->cache->has(StreamService::STREAM_SAVED);
     }
 
     /**
@@ -24,7 +55,7 @@ class StreamService
      */
     public function getSavedStream()
     {
-        return Cache::get(StreamService::STREAM_SAVED);
+        return $this->cache->get(StreamService::STREAM_SAVED);
     }
 
     /**
@@ -33,7 +64,7 @@ class StreamService
      */
     public function saveStream(Entities\Stream $streamEntity)
     {
-        Cache::forever(StreamService::STREAM_SAVED, $streamEntity);
+        $this->cache->forever(StreamService::STREAM_SAVED, $streamEntity);
     }
 
     /**
@@ -41,7 +72,7 @@ class StreamService
      */
     public function removeSavedStream()
     {
-        Cache::forget(StreamService::STREAM_SAVED);        
+        $this->cache->forget(StreamService::STREAM_SAVED);        
     }
 
     /**
@@ -50,14 +81,12 @@ class StreamService
      */
     public function callTwitchApi($slugName)
     {
-        $client = new Client;
-
-        $link = config('api.twitch.url') .
+        $link = $this->config['url'] .
             'streams/' .
             $slugName .
-            '?client_id=' . config('api.twitch.key');
+            '?client_id=' . $this->config['key'];
 
-        $result = $client->request('GET', $link);
+        $result = $this->client->request('GET', $link);
 
         $result = json_decode($result->getBody()->getContents(), true);
 
