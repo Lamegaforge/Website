@@ -14,6 +14,8 @@
 
 @section('content')
 
+  @include('guest.stream.partials.alert')
+
 	@include('guest.video.partials.overlay', ['hash' => $video->hash])
 
   <section>
