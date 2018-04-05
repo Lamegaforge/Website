@@ -16,6 +16,7 @@
   @include('guest.stream.partials.alert')
 
   <!-- main -->
+
   <section class="bg-image" style="background-image: url('https://img.youtube.com/vi/{{$lastVideo->hash}}/maxresdefault.jpg');">
     <div class="overlay"></div>
     <div class="container">
@@ -88,7 +89,7 @@
             <div class="card-block">
               <h4 class="card-title"><a href="{{route('video.show', ['id' => $video->id])}}">{{$video->title}}</a></h4>
               <div class="card-meta">
-                <span><i class="fa fa-clock-o"></i> 2 hours ago</span>
+                <span><i class="fa fa-clock-o"></i> {{$video->published_at}}</span>
                 <span>{{$video->view_count}} views</span>
               </div>
               <p>{{$video->description}}</p>
