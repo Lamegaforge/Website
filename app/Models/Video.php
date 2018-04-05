@@ -15,6 +15,7 @@ class Video extends Model
         'view_count',
         'like_count',
         'dislike_count',
+        'online'
     ];	
 
     public function channel()
