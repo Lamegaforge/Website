@@ -6,6 +6,7 @@ use Cache;
 use GuzzleHttp\Client;
 use App\Services\StreamService;
 use App\Repositories\StreamRepository;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -17,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Schema::defaultStringLength(191);
     }
 
     /**
