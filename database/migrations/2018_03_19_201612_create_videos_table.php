@@ -24,7 +24,7 @@ class CreateVideosTable extends Migration
             $table->integer('like_count')->nullable();
             $table->integer('dislike_count')->nullable();
             $table->boolean('online')->default(true);
-            $table->time('published_at')->nullable();
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
     }

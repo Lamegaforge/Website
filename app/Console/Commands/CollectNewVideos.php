@@ -52,7 +52,7 @@ class CollectNewVideos extends Command
 
                 foreach ($videoEntityList as $videoEntity) {
 
-                    $alreadyRegistered = $videoRepository->findWhere(['hash', $videoEntity->hash]);
+                    $alreadyRegistered = $videoRepository->findWhere(['hash' => $videoEntity->hash]);
 
                     if ($alreadyRegistered->isNotEmpty()) {
                         continue;
