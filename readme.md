@@ -1,3 +1,3 @@
 ## About LaMegaForge
 
-Hello guys !
+Funambules de l'éthique depuis 2012.
