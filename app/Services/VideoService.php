@@ -66,7 +66,18 @@ class VideoService
         return [
             'title' => $response->snippet->title,
             'published_at' => $publishedAt->format('Y-m-d'),
-            'description' => $response->snippet->description,
+            'description' => $this->formatDescription($response->snippet->description),
         ];
+    }
+
+    protected function formatDescription($description)
+    {
+        preg_match('^(.+?)-{5,}^s', $description, $matches);
+
+        if (! isset($matches[1])) {
+            return $description;
+        }
+
+        return $matches[1];
     }
 }
