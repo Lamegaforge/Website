@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use DateTime;
 use DateInterval;
 use Illuminate\Http\Request;
 use App\Exceptions\InvalidApiResponseException;
@@ -60,9 +61,11 @@ class VideoService
 
     protected function formatBaseResponseApi($response)
     {
+        $publishedAt = new DateTime($response->snippet->publishedAt);
+
         return [
             'title' => $response->snippet->title,
-            'published_at' => $response->snippet->publishedAt,
+            'published_at' => $publishedAt->format('Y-m-d'),
             'description' => $response->snippet->description,
         ];
     }
