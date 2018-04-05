@@ -29,8 +29,8 @@
         </div>
       </div>
       <div class="text-right m-t-20">
-        <a href="videos.html" class="btn btn-outline-default btn-rounded btn-lg float-left m-r-30">Donate me <i class="fa fa-heart-o"></i></a>
-        <a href="videos.html" class="btn btn-twitch btn-shadow btn-rounded btn-lg m-l-20">Watch on Twitch <i class="fa fa-twitch"></i></a>
+        <a href="{{config('stream.donate_url')}}" class="btn btn-outline-default btn-rounded btn-lg float-left m-r-30">Donate me <i class="fa fa-heart-o"></i></a>
+        <a href="https://www.twitch.tv/{{$stream->name}}" class="btn btn-twitch btn-shadow btn-rounded btn-lg m-l-20">Watch on Twitch <i class="fa fa-twitch"></i></a>
       </div>
     </div>
   </section>
