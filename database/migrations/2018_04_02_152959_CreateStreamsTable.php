@@ -17,7 +17,7 @@ class CreateStreamsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('slug_name');
-            $table->integer('hash');
+            $table->string('hash');
             $table->text('description')->nullable();
             $table->boolean('selected')->default(false);
             $table->timestamps();
