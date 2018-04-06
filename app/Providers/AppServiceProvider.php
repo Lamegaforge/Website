@@ -7,6 +7,7 @@ use GuzzleHttp\Client;
 use App\Services\StreamService;
 use App\Repositories\StreamRepository;
 use Illuminate\Support\Facades\Schema;
+use App\Managers\Stream\StreamManager;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -39,7 +40,11 @@ class AppServiceProvider extends ServiceProvider
                 app('cache.store'),
                 config('api.twitch')
             );
-        });        
+        });    
+
+        $this->app->bind(StreamManager::class, function($app) {
+            return with(new StreamManager(app()))->driver();
+        });    
     }
 }
 
