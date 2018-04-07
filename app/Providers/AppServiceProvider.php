@@ -41,8 +41,7 @@ class AppServiceProvider extends ServiceProvider
             return new StreamService(
                 new StreamRepository(app()),
                 app(StreamManager::class),
-                app('cache.store'),
-                config('api.twitch')
+                app('cache.store')
             );
         });    
     }
