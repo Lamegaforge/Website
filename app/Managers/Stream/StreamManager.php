@@ -11,14 +11,16 @@ class StreamManager extends Manager
     {
         $client = new Client;
 
-        $config = $this->app['config']['api.twitch'];
+        $config = $this->app['config']['stream.drivers.client'];
 
         return $this->repository(new Drivers\Client($client, $config));
     }
 
     protected function createMockDriver()
     {
-        return $this->repository(new Drivers\Mock());
+        $config = $this->app['config']['stream.drivers.mock'];
+
+        return $this->repository(new Drivers\Mock($config));
     }
 
     protected function repository(Contracts\Driver $driver)

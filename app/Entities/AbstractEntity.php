@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Services\Entities;
-
-use App\Services\Contracts\Entity;
+namespace App\Entities;
 
 abstract class AbstractEntity implements Entity
 {

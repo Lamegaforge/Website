@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Entities;
+namespace App\Entities;
 
 class Video extends AbstractEntity
 {

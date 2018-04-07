@@ -4,7 +4,7 @@ namespace App\Services;
 
 use Cache;
 use Config;
-use App\Services\Entities;
+use App\Entities;
 use GuzzleHttp\ClientInterface;
 use App\Repositories\StreamRepository;
 
@@ -13,14 +13,14 @@ class StreamService
     const STREAM_SAVED = 'stream';
 
     protected $stream;
-    protected $client;
+    protected $streamManager;
     protected $cache;
     protected $config;
 
-    public function __construct(StreamRepository $stream, ClientInterface $client, $cache, array $config)
+    public function __construct(StreamRepository $stream, $streamManager, $cache, array $config)
     {
         $this->stream = $stream;
-        $this->client = $client;
+        $this->streamManager = $streamManager;
         $this->cache = $cache;
         $this->config = $config;
     }
@@ -32,14 +32,13 @@ class StreamService
     {
         $selectedStream = $this->stream->getSelected();
 
-        $streamEntity = $this->callTwitchApi($selectedStream->slug_name);
+        $streamEntity = $this->streamManager->callBySlugName($selectedStream->slug_name);
 
-        if (! $streamEntity) {
-            $this->removeSavedStream();
-            return;
+        if ($streamEntity) {
+            return $this->saveStream($streamEntity);
         }
-
-        $this->saveStream($streamEntity);
+        
+        $this->removeSavedStream();
     }
 
     /**

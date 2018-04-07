@@ -2,6 +2,7 @@
 
 namespace App\Managers\Stream\Drivers;
 
+use App\Entities;
 use GuzzleHttp\ClientInterface;
 use App\Managers\Stream\Contracts\Driver;
 
@@ -18,7 +19,6 @@ class Client implements Driver
 
 	public function callBySlugName($slugName)
 	{
-		die;
         $link = $this->config['url'] .
             'streams/' .
             $slugName .
@@ -27,7 +27,7 @@ class Client implements Driver
         $result = $this->client->request('GET', $link);
 
         $result = json_decode($result->getBody()->getContents(), true);
-dd($result);
+
         if (! $result['stream']) {
             return null;
         }
@@ -36,4 +36,23 @@ dd($result);
 
         return new Entities\Stream($params);
 	}
+
+    /**
+     * @param  array  $result
+     * @return array
+     */
+    protected function formatApiResponse(array $result)
+    {
+        $template = $result['stream']['preview']['template'];
+
+        $template = str_replace('{width}', 1280, $template);
+        $template = str_replace('{height}', 720, $template);
+
+        return [
+            'name' => $result['stream']['channel']['name'],
+            'status' => $result['stream']['channel']['status'],
+            'game' => $result['stream']['game'],
+            'template' => $template,
+        ];
+    }	
 }
