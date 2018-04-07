@@ -33,17 +33,17 @@ class AppServiceProvider extends ServiceProvider
             return new \Alaouy\Youtube\Youtube(config('api.youtube.key'));
         });
 
+        $this->app->bind(StreamManager::class, function($app) {
+            return with(new StreamManager(app()))->driver();
+        });    
+
         $this->app->bind(StreamService::class, function(){
             return new StreamService(
                 new StreamRepository(app()),
-                new Client,
+                app(StreamManager::class),
                 app('cache.store'),
                 config('api.twitch')
             );
-        });    
-
-        $this->app->bind(StreamManager::class, function($app) {
-            return with(new StreamManager(app()))->driver();
         });    
     }
 }
