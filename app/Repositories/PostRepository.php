@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-class VideoChannelRepository extends AbstractRepository {
+class PostRepository extends AbstractRepository {
 
     /**
      * Specify Model class name
@@ -11,6 +11,6 @@ class VideoChannelRepository extends AbstractRepository {
      */
     function model()
     {
-        return "App\\Models\\VideoChannel";
+        return "App\\Models\\Post";
     }
 }
