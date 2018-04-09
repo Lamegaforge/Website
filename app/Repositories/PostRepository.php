@@ -13,4 +13,13 @@ class PostRepository extends AbstractRepository {
     {
         return "App\\Models\\Post";
     }
+
+    public function getLastOnline($limit = 1)
+    {
+        $this->resetCriteria();
+
+        $this->with(['category', 'thumbnail']);
+
+        return $this->commonLastOnline($limit);        
+    }    
 }

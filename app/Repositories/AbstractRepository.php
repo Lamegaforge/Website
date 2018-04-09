@@ -20,6 +20,11 @@ abstract class AbstractRepository extends BaseRepository
     {
         $this->resetCriteria();
 
+        $this->commonLastOnline($limit)        
+    }
+
+    public function commonLastOnline($limit = 1)
+    {
         $this->pushCriteria(new Criterias\Published());
         $this->pushCriteria(new Criterias\Online());
         $this->pushCriteria(new Criterias\OrderBy('published_at'));
