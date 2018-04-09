@@ -14,5 +14,10 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
         $this->call(VideoChannelsTableSeeder::class);
         $this->call(StreamTableSeeder::class);
+        $this->call(CategoriesTableSeeder::class);
+
+        if (env('APP_ENV') == 'dev') {
+            $this->call(PostsTableSeeder::class);
+        }
     }
 }
