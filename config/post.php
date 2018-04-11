@@ -3,7 +3,12 @@
 return [
 
 	'categories' => [
-		'nouvelle',
+		'new',
 		'article'
 	];
+
+	'attachments' => [
+		'video',
+		'image',
+	]
 ];

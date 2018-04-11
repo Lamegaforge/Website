@@ -53,3 +53,27 @@ $factory->define(App\Models\Stream::class, function (Faker\Generator $faker) {
         'selected' => false,
     ];
 });
+
+$factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
+    return [
+        'title' =>  $faker->name,
+        'slug' =>  $faker->slug,
+        'content' =>  $faker->name,
+        'online' => true,
+        'published_at' => $faker->dateTime('now'),
+    ];
+});
+
+$factory->define(App\Models\Category::class, function (Faker\Generator $faker) {
+    return [
+        'name' =>  $faker->randomElement(config('post.categories')),
+    ];
+});
+
+$factory->define(App\Models\Thumbnail::class, function (Faker\Generator $faker) {
+    return [
+        'name' =>  $faker->name,
+        'type' =>  'image',
+        'hash' =>  $faker->imageUrl(),
+    ];
+});
