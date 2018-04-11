@@ -3,17 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Repositories\PostRepository;
+use App\Repositories\VideoRepository;
 
 class HomeController extends Controller
 {
+    protected $postRepository;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(PostRepository $postRepository, VideoRepository $videoRepository)
     {
-        $this->middleware('auth');
+        $this->postRepository = $postRepository;
+        $this->videoRepository = $videoRepository;
     }
 
     /**
@@ -23,6 +28,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $posts = $this->postRepository->getLastOnline(10);
+        $videos = $this->videoRepository->getLastOnline(10);
+
+        return view('guest.home.index', [
+            'posts' => $posts, 
+            'videos' => $videos, 
+        ]);        
     }
 }
