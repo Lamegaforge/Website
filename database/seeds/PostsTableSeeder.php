@@ -21,9 +21,12 @@ class PostsTableSeeder extends Seeder
                 'user_id' => 1,
             ])->each(function ($post) use($category) {
                 $post->thumbnail()->associate(
-                    factory(App\Models\Thumbnail::class)->create()
-                ); 
-                $post->category()->associate($category->id);                 
+                    factory(App\Models\Thumbnail::class)->create([
+                        'type' => 'image',
+                        'hash' => '/img/blog/blog-1.jpg',
+                    ])
+                );
+                $post->category()->associate($category->id);
             })->each(function($post){
                 $post->save();
             });
