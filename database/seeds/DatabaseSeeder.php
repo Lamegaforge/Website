@@ -13,11 +13,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UsersTableSeeder::class);
         $this->call(VideoChannelsTableSeeder::class);
+        $this->call(StreamTableSeeder::class);
+        $this->call(CategoriesTableSeeder::class);
 
-        factory(\App\Models\Stream::class)->create([
-            'name' => 'lamegaforgelive',
-            'slug_name' => 'lamegaforgelive',
-            'selected' => true,
-        ]);
+        if (env('APP_ENV') == 'dev') {
+            $this->call(PostsTableSeeder::class);
+        }
     }
 }

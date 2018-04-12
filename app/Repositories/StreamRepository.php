@@ -2,9 +2,7 @@
 
 namespace App\Repositories;
 
-use Prettus\Repository\Eloquent\BaseRepository;
-
-class StreamRepository extends BaseRepository {
+class StreamRepository extends AbstractRepository {
 
     /**
      * Specify Model class name

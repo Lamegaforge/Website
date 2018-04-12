@@ -15,14 +15,12 @@ class StreamService
     protected $stream;
     protected $streamManager;
     protected $cache;
-    protected $config;
 
-    public function __construct(StreamRepository $stream, $streamManager, $cache, array $config)
+    public function __construct(StreamRepository $stream, $streamManager, $cache)
     {
         $this->stream = $stream;
         $this->streamManager = $streamManager;
         $this->cache = $cache;
-        $this->config = $config;
     }
 
     /**

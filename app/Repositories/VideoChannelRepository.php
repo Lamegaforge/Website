@@ -2,9 +2,7 @@
 
 namespace App\Repositories;
 
-use Prettus\Repository\Eloquent\BaseRepository;
-
-class VideoChannelRepository extends BaseRepository {
+class VideoChannelRepository extends AbstractRepository {
 
     /**
      * Specify Model class name

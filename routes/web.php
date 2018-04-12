@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/', 'HomeController@index')->name('stream.index');
+
 Route::group(['namespace' => 'Guest'], function () {
 	Route::prefix('video')->group(function () {
 		Route::get('/', 'VideoController@index')->name('video.index');
@@ -19,10 +21,6 @@ Route::group(['namespace' => 'Guest'], function () {
 	Route::prefix('stream')->group(function () {
 		Route::get('/', 'StreamController@index')->name('stream.index');
 	});	
-});
-
-Route::get('/', function () {
-    return view('home');
 });
 
 Auth::routes();

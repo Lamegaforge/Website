@@ -14,6 +14,8 @@
   <!-- theme css -->
   <link rel="stylesheet" href="/css/theme.min.css">
   <link rel="stylesheet" href="/css/custom.css">
+  <!-- plugins css -->
+  <link href="plugins/owl-carousel/css/owl.carousel.min.css" rel="stylesheet">  
 <!--
     <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
 </head>
@@ -88,8 +90,8 @@
   <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
 
   <!-- theme js -->
-  <script src="/js/theme.min.js"></script>
   @yield('scripts')
+  <script src="/js/theme.min.js"></script>
 <!--   <script src="{{ asset('js/app.js') }}"></script>
  -->
 </body>
