@@ -4,8 +4,8 @@ return [
 
 	'categories' => [
 		'new',
-		'article'
-	];
+		'article',
+	],
 
 	'attachments' => [
 		'video',
