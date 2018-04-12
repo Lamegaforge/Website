@@ -39,7 +39,7 @@ $factory->define(App\Models\Video::class, function (Faker\Generator $faker) {
         'description' => $faker->text,
         'view_count' => $faker->numberBetween(1000, 5000),
         'like_count' => $faker->numberBetween(10, 200),
-        'online' => $faker->boolean ,
+        'online' => true,
         'published_at' => $faker->dateTime('now'),
     ];
 });
