@@ -20,7 +20,7 @@ abstract class AbstractRepository extends BaseRepository
     {
         $this->resetCriteria();
 
-        $this->commonLastOnline($limit)        
+        return $this->commonLastOnline($limit);
     }
 
     public function commonLastOnline($limit = 1)
