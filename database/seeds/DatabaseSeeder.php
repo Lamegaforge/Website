@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
 
         if (env('APP_ENV') == 'dev') {
             $this->call(PostsTableSeeder::class);
+            $this->call(VideosTableSeeder::class);
         }
     }
 }
