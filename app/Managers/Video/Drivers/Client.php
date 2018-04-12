@@ -8,7 +8,7 @@ use DateInterval;
 use Carbon\Carbon;
 use App\Managers\Video\Contracts\Driver;
 
-class Mock implements Driver
+class Client implements Driver
 {
     protected $config;
     protected $client;

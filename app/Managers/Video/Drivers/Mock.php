@@ -9,7 +9,7 @@ use App\Managers\Video\Contracts\Driver;
 class Mock implements Driver
 {
     const MIN = 1;
-    const MAX = 1000
+    const MAX = 1000;
 
     protected $config;
     protected $faker;
@@ -17,6 +17,7 @@ class Mock implements Driver
     public function __construct(array $config, $faker)
     {
         $this->config = $config;
+        $this->faker = $faker;
     }
 
     public function find($hash)

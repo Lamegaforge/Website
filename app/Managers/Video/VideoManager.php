@@ -2,7 +2,9 @@
 
 namespace App\Managers\Video;
 
+use Faker\Generator;
 use GuzzleHttp\Client;
+use Faker\Factory as Faker;
 use Illuminate\Support\Manager;
 
 class VideoManager extends Manager
@@ -26,7 +28,9 @@ class VideoManager extends Manager
     {
         $config = $this->app['config']['video.drivers.mock'];
 
-        return $this->repository(new Drivers\Mock($config));
+        $faker = Faker::create();
+
+        return $this->repository(new Drivers\Mock($config, $faker));
     }
 
     /**
