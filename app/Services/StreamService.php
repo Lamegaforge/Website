@@ -73,47 +73,4 @@ class StreamService
     {
         $this->cache->forget(StreamService::STREAM_SAVED);        
     }
-
-    /**
-     * @param  string $slugName
-     * @return mixed
-     */
-    public function callTwitchApi($slugName)
-    {
-        $link = $this->config['url'] .
-            'streams/' .
-            $slugName .
-            '?client_id=' . $this->config['key'];
-
-        $result = $this->client->request('GET', $link);
-
-        $result = json_decode($result->getBody()->getContents(), true);
-
-        if (! $result['stream']) {
-            return null;
-        }
-
-        $params = $this->formatApiResponse($result);
-
-        return new Entities\Stream($params);
-    }
-
-    /**
-     * @param  array  $result
-     * @return array
-     */
-    protected function formatApiResponse(array $result)
-    {
-        $template = $result['stream']['preview']['template'];
-
-        $template = str_replace('{width}', 1280, $template);
-        $template = str_replace('{height}', 720, $template);
-
-        return [
-            'name' => $result['stream']['channel']['name'],
-            'status' => $result['stream']['channel']['status'],
-            'game' => $result['stream']['game'],
-            'template' => $template,
-        ];
-    }
 }
