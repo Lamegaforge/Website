@@ -34,8 +34,8 @@
   </div>
   @if ($post->thumbnail->type == 'video')
     @include('guest.home.posts.video', ['post' => $post])
-  @elseif($post->thumbnail->type == 'soundcloud')
-    @include('guest.home.posts.soundcloud', ['post' => $post])
+  @elseif($post->thumbnail->type == 'soundclound')
+    @include('guest.home.posts.soundclound', ['post' => $post])
   @else
     @include('guest.home.posts.default', ['post' => $post])
   @endif

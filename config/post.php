@@ -10,5 +10,6 @@ return [
 	'attachments' => [
 		'video',
 		'image',
+		'soundcloud',
 	]
 ];
