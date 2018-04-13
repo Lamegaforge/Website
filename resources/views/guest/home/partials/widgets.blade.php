@@ -1,6 +1,6 @@
 <div class="sidebar">
   <!-- widget-games -->
-  <div class="widget widget-games">
+<!--   <div class="widget widget-games">
     <h5 class="widget-title">Upcoming Games</h5>
     <a href="#" style="background-image: url('https://i1.ytimg.com/vi/mW4LMCtoIkg/mqdefault.jpg')">
     <span class="overlay"></span>
@@ -52,35 +52,17 @@
       </div>
     </div>
   </a>
-  </div>
+  </div> -->
 
   <!-- widget post  -->
-  <div class="widget widget-post">
-    <h5 class="widget-title">Recommends</h5>
-    <a href="blog-post.html"><img src="https://i1.ytimg.com/vi/4BLkEJu9szM/mqdefault.jpg" alt=""></a>
-    <h4><a href="blog-post.html">Titanfall 2's Trophies Only Have 3 Multiplayer</a></h4>
-    <span><i class="fa fa-clock-o"></i> June 12, 2017</span>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel neque sed ante facilisis efficitur.</p>
-  </div>
-
+  @include('guest.home.widgets.recommends', [])
+  
   <!-- widget facebook -->
-  <div class="widget">
-    <h5 class="widget-title">Follow Us on Facebook</h5>
-    <div id="fb-root"></div>
-    <script async="" src="https://www.google-analytics.com/analytics.js"></script>
-    <script id="facebook-jssdk" src="//connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v2.8"></script>
-    <script>
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-    </script>
-    <div class="fb-page" data-href="https://www.facebook.com/yakuthemes" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"></div>
-  </div>
+  @include('guest.home.widgets.facebook', [])
+  
+
+
+
 
   <!-- widget post -->
   <div class="widget widget-post">
