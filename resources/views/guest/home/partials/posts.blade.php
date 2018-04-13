@@ -33,20 +33,11 @@
     <span><a href="blog-post.html#comments"><i class="fa fa-comment-o"></i> 98 comments</a></span>
   </div>
   @if ($post->thumbnail->type == 'video')
-  <div class="post-thumbnail">
-    <div class="video-play" data-src="https://www.youtube.com/embed/{{$post->thumbnail->hash}}?rel=0&amp;amp;autoplay=1&amp;amp;showinfo=0">
-      <div class="embed-responsive embed-responsive-16by9">
-        <img class="embed-responsive-item" src="https://img.youtube.com/vi/{{$post->thumbnail->hash}}/maxresdefault.jpg">
-        <div class="video-play-icon"><i class="fa fa-play"></i></div>
-      </div>
-    </div>
-    <span class="badge badge-steam">{{$post->category->name}}</span>
-  </div>
+    @include('guest.home.posts.video', ['post' => $post])
+  @elseif($post->thumbnail->type == 'soundcloud')
+    @include('guest.home.posts.soundcloud', ['post' => $post])
   @else
-  <div class="post-thumbnail">
-    <img src="{{$post->thumbnail->hash}}" alt="{{$post->thumbnail->name}}">
-    <span class="badge badge-ps4">{{$post->category->name}}</span>
-  </div>
+    @include('guest.home.posts.default', ['post' => $post])
   @endif
   <p>{{$post->description}}</p>
 </div>
