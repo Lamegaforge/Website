@@ -60,12 +60,8 @@
   <!-- widget facebook -->
   @include('guest.home.widgets.facebook', [])
   
-
-
-
-
   <!-- widget post -->
-  <div class="widget widget-post">
+<!--   <div class="widget widget-post">
     <h5 class="widget-title">Popular on Gameforest</h5>
     <a href="blog-post.html"><img src="img/blog/blog-widget-popular-1.jpg" alt=""></a>
     <h4><a href="blog-post.html">Red Dead Redemption Being Modded Into GTA5 Multiplayer</a></h4>
@@ -101,10 +97,10 @@
         </div>
       </li>
     </ul>
-  </div>
+  </div> -->
 
   <!-- widget tabs -->
-  <div class="widget widget-tabs">
+<!--   <div class="widget widget-tabs">
     <ul class="nav nav-tabs" role="tablist">
       <li class="nav-item"><a class="nav-link active" href="#comments" aria-controls="comments" role="tab" data-toggle="tab"><i class="fa fa-comment-o"></i> Comments</a></li>
       <li class="nav-item"><a class="nav-link" href="#popular" aria-controls="popular" role="tab" data-toggle="tab">Popular</a></li>
@@ -196,5 +192,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
