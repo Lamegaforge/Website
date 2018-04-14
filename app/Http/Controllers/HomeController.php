@@ -29,7 +29,7 @@ class HomeController extends Controller
     public function index()
     {
         $posts = $this->postRepository->getLastOnline(4);
-        $videos = $this->videoRepository->getLastOnline(10);
+        $videos = $this->videoRepository->getLastOnlineWithoutPaginator(10);
 
         return view('guest.home.index', [
             'posts' => $posts, 

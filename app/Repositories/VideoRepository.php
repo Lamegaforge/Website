@@ -63,5 +63,14 @@ class VideoRepository extends AbstractRepository {
         return $this->get();         
     } 
 
+    public function getLastOnlineWithoutPaginator($limit = 1)
+    {
+        $this->resetCriteria();
 
+        $this->commonLastOnline();  
+
+        $this->pushCriteria(new Criterias\Limit($limit));
+
+        return ($limit > 1) ? $this->get() : $this->first() ;
+    }    
 }

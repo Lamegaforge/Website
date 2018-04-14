@@ -20,22 +20,15 @@ abstract class AbstractRepository extends BaseRepository
     {
         $this->resetCriteria();
 
-        return $this->commonLastOnline($limit);
+        $this->commonLastOnline();
+
+        return ($limit > 1) ? $this->paginate($limit) : $this->first() ;       
     }
 
-    public function commonLastOnline($limit = 1)
+    public function commonLastOnline()
     {
         $this->pushCriteria(new Criterias\Published());
         $this->pushCriteria(new Criterias\Online());
         $this->pushCriteria(new Criterias\OrderBy('published_at'));
-
-        if ($limit > 1) {
-            
-            $this->pushCriteria(new Criterias\Limit($limit));
-
-            return $this->get();        
-        }
-
-        return $this->first();        
     }
 }
