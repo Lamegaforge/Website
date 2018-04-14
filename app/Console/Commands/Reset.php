@@ -37,8 +37,8 @@ class Reset extends Command
      */
     public function handle()
     {
-        if (env('APP_ENV') == 'prod') {
-            throw new \Exception("Non");
+        if (env('APP_ENV') != 'dev') {
+            throw new \Exception("Not allowed in this environment");
         }
 
         $commands = [
