@@ -29,7 +29,7 @@
 <div class="post">
   <h2 class="post-title"><a href="blog-post.html">{{$post->title}}</a></h2>
   <div class="post-meta">
-    <span><i class="fa fa-clock-o"></i> June 16, 2017 by <a href="profile.html">Constantine</a></span>
+    <span><i class="fa fa-clock-o"></i> {{$post->published_at}} by <a href="profile.html">Constantine</a></span>
     <span><a href="blog-post.html#comments"><i class="fa fa-comment-o"></i> 98 comments</a></span>
   </div>
   @if ($post->thumbnail->type == 'video')
@@ -39,24 +39,10 @@
   @else
     @include('guest.home.posts.default', ['post' => $post])
   @endif
-  <p>{{$post->description}}</p>
+  <p>{{$post->highlight}}</p>
 </div>
 @endforeach
 
-<div class="pagination-results">
-  <span>Showing 10 to 20 of 48 results</span>
-  <nav aria-label="Page navigation">
-    <ul class="pagination">
-      <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true"><i class="fa fa-angle-left"></i></span></a></li>
-      <li class="page-item active"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" href="#">4</a></li>
-      <li class="page-item"><a class="page-link" href="#">5</a></li>
-      <li class="separate"><span>...</span></li>
-      <li class="page-item"><a class="page-link" href="#">25</a></li>
-      <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true"><i class="fa fa-angle-right"></i></span></a></li>
-    </ul>
-  </nav>
-</div>
+@include('paginations.default', ['paginator' => $posts])
+
 <!-- /.post -->

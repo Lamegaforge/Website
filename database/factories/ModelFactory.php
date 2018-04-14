@@ -59,6 +59,7 @@ $factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
         'title' =>  $faker->name,
         'slug' =>  $faker->slug,
         'content' =>  $faker->name,
+        'highlight' => $faker->text,
         'online' => true,
         'published_at' => $faker->dateTime('now'),
     ];

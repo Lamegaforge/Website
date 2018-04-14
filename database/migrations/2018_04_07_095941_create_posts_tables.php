@@ -20,6 +20,7 @@ class CreatePostsTables extends Migration
             $table->integer('thumbnail_id');
             $table->string('title');
             $table->string('slug');
+            $table->text('highlight');
             $table->text('content');
             $table->boolean('online')->default(false);
             $table->timestamp('published_at')->nullable();
