@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use App\Models\videoChannel;
+use App\Models\VideoChannel;
 
 class VideosTableSeeder extends Seeder
 {
