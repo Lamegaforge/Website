@@ -3,31 +3,27 @@
 namespace App\Http\Controllers\Guest;
 
 use Illuminate\Http\Request;
+use App\Services\VideoService;
 use App\Services\StreamService;
 use App\Http\Controllers\Controller;
 use App\Repositories\VideoRepository;
 use App\Repositories\StreamRepository;
-use App\Repositories\VideoChannelRepository;
 
 class StreamController extends Controller
 {
-    protected $video;
-    protected $stream;
-    protected $videoChannel;
+    protected $videoRepository;
 
-    public function __construct(VideoRepository $video, StreamRepository $stream, VideoChannelRepository $videoChannel)
+    public function __construct(VideoRepository $videoRepository)
     {
-        $this->video = $video;
-        $this->stream = $stream;
-        $this->videoChannel = $videoChannel;
+        $this->videoRepository = $videoRepository;
     }
 
     public function index(Request $request)
     {
-        $channel = $this->videoChannel->findWhere([
-            'hash' => config('stream.rediff_channel_hash')
-        ]);
-        $videos = $this->video->getLastOnlineRandomByChannel($channel->first->slug_name, 20);
+        $rediffChannel = app(VideoService::class)->getRediffChannel();
+
+        $videos = $this->videoRepository->getLastOnlineRandomByChannel($rediffChannel->slug_name, 20);
+
         $stream = app(StreamService::class)->getSavedStream();
 
         return view('guest.stream.index', [
