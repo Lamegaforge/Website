@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateUserRequest;
@@ -15,11 +16,11 @@ class UserController extends Controller
         $this->userRepository = $userRepository;
     }
 
-    public function edit(UpdateUserRequest $request, $id)
+    public function edit(Request $request, $id)
     {
         $user = $this->userRepository->find($id);
 
-        return view('auth.user.edit', [$id]);
+        return view('auth.user.edit', ['user' => $user]);
     } 
 
     public function updateInformations(UpdateUserInformationsRequest $request, $id)
@@ -38,7 +39,9 @@ class UserController extends Controller
 
     public function updateAvatar(UpdateUserAvatarRequest $request, $id)
     {
-        $fileName = app(UserService::class)->upload($request->file);
+        $user = $this->userRepository->find($id);
+
+        $fileName = app(UserService::class)->refreshAvatar($user, $request->file);
 
         $this->update(['avatar' => $fileName]);
 
@@ -47,7 +50,7 @@ class UserController extends Controller
 
     public function updateBanner(UpdateUserBannerRequest $request, $id)
     {
-        $fileName = app(UserService::class)->upload($request->file);
+        $fileName = app(UserService::class)->refreshBanner($request->file);
 
         $this->update(['banner' => $fileName]);
 
