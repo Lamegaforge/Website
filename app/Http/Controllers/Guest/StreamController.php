@@ -7,7 +7,6 @@ use App\Services\VideoService;
 use App\Services\StreamService;
 use App\Http\Controllers\Controller;
 use App\Repositories\VideoRepository;
-use App\Repositories\StreamRepository;
 
 class StreamController extends Controller
 {
