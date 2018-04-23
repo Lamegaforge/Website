@@ -50,11 +50,11 @@ class UserController extends Controller
 
     public function updateBanner(UpdateUserBannerRequest $request, $id)
     {
-        $fileName = app(UserService::class)->refreshBanner($request->file);
+        $fileName = app(UserService::class)->refreshBanner($user, $request->file);
 
         $this->update(['banner' => $fileName]);
 
-        return redirect('auth.user.edit', [$id]);        
+        return redirect('auth.user.edit', [$id]);
     }
 
     protected function update(array $params, $id)
@@ -63,6 +63,6 @@ class UserController extends Controller
 
         $user->update($params);
 
-        $user->save();        
+        $user->save();
     }
 }
