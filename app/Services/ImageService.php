@@ -2,26 +2,15 @@
 
 namespace App\Services;
 
+use Image;
+use Illuminate\Http\UploadedFile;
+
 class ImageService
 {
-    protected $imageManager;
-
-    public function __construct(ImageManager $imageManager)
+    public function upload(UploadedFile $file, array $params)
     {
-        $this->imageManager = $imageManager;
-    }
-
-    public function upload($file)
-    {
-        $img = $this->imageManager->make($file);
-
-        $img->fit(300, 200);
-
-        $img->save('foo/bar.jpg');
-    }
-
-    protected function getFolderName($path)
-    {
-        return storage_path(config('image.banner.path'));
+        \Image::make($file->getRealPath())
+            ->resize($params['sizes'][0], $params['sizes'][1])
+            ->save($params['full_path']);
     }
 }

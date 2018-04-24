@@ -23,13 +23,12 @@ Route::group(['namespace' => 'Guest'], function () {
 	});	
 });
 
-Route::group(['namespace' => 'Auth', 'middleware' => ['auth', 'my'], 'prefix' => 'auth'], function () {
+Route::group(['namespace' => 'Auth', 'middleware' => ['auth'], 'prefix' => 'auth'], function () {
 	Route::prefix('user')->group(function () {
 		Route::get('{user_id}/edit', 'UserController@edit')->name('auth.user.edit');
-		Route::post('update-informations/{user_id}', 'UserController@update')->name('auth.user.update');
+		Route::post('update-informations/{user_id}', 'UserController@updateInformations')->name('auth.user.update');
 		Route::post('update-password/{user_id}', 'UserController@updatePassword')->name('auth.user.update_password');
-		Route::post('update-avatar/{user_id}', 'UserController@updateAvatar')->name('auth.user.update_avatar');
-		Route::post('update-banner/{user_id}', 'UserController@updateBanner')->name('auth.user.update_banner');
+		Route::post('update-medias/{user_id}', 'UserController@updateMedias')->name('auth.user.update_medias');
 	});
 });
 

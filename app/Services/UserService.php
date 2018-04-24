@@ -2,48 +2,62 @@
 
 namespace App\Services;
 
+use File;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 
 class UserService
 {
-    protected $imageManager;
+    protected $imageService;
     protected $config;
 
-    public function __construct(ImageManager $imageManager, array $config)
+    public function __construct(ImageService $imageService, array $config)
     {
-        $this->imageManager = $imageManager;
+        $this->imageService = $imageService;
         $this->config = $config;
     }
 
-    public function refreshAvatar(User $user, $file)
+    public function refreshAvatar(User $user, UploadedFile $file)
     {
-        // plusieurs taille à créer ?
-        $path = $this->getFolderPath($user, $this->config['avatar.path']);
+        $config = $this->config['images']['avatar'];
 
-        $sizes = $this->config['avatar.size'];
-
-        return $this->upload($file, $path, $sizes);
+        $this->upload($file, $user, $config);
     }
 
-    public function refreshBanner(User $user, $file)
+    public function refreshBanner(User $user, UploadedFile $file)
     {
-        $path = $this->getFolderPath($user, $this->config['banner.path']);
+        $config = $this->config['images']['banner'];
 
-        $sizes = $this->config['baner.size'];
-
-        return $this->upload($file, $path, $sizes);
+        $this->upload($file, $user, $config);
     }
 
-    protected function upload($file, $path, $sizes)
+    protected function upload(UploadedFile $file, User $user, array $imagesParamsList)
     {
-        $this->imageManager->upload($file, $path, $sizes);
+        $userFilesPath = $this->getUserFilesPath($user);
+
+        $this->createUserFilesFolder($userFilesPath);
+
+        foreach ($imagesParamsList as $params) {
+
+            $params['full_path'] = $userFilesPath . DIRECTORY_SEPARATOR . $params['name'];
+
+            $this->imageService->upload($file, $params);
+        }
     }
 
-    protected function getFolderPath(User $user, $path)
+    protected function createUserFilesFolder($path)
     {
-        // storage/user_id/banner.jpg
-        // storage/user_id/avart.jpg
-        return storage_path($path . '/' . $user->id);
+        if (File::exists($path)) {
+            return;
+        }
+        
+        File::makeDirectory($path);
+    }
+
+    protected function getUserFilesPath(User $user)
+    {
+        $path = $this->config['images']['path'];
+
+        return storage_path($path . DIRECTORY_SEPARATOR . $user->id);
     }
 }

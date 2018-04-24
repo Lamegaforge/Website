@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\UpdateUserInformationsRequest;
+use App\Http\Requests\UpdateUserMediasRequest;
 use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UpdateUserRequest;
+use App\Services\UserService;
+
 
 class UserController extends Controller
 {
@@ -25,44 +29,37 @@ class UserController extends Controller
 
     public function updateInformations(UpdateUserInformationsRequest $request, $id)
     {
-        $this->update($request->all());
+        $this->update($request->all(), $id);
 
-        return redirect('auth.user.edit', [$id]);
+        return \Redirect::route('auth.user.edit', ['user_id' => $id]);
     }   
 
     public function updatePassword(UpdateUserPasswordRequest $request, $id)
     {
-        $this->update($request->all());
+        $this->update($request->all(), $id);
 
         return redirect('auth.user.edit', [$id]);        
     }
 
-    public function updateAvatar(UpdateUserAvatarRequest $request, $id)
+    public function updateMedias(UpdateUserMediasRequest $request, $id)
     {
         $user = $this->userRepository->find($id);
 
-        $fileName = app(UserService::class)->refreshAvatar($user, $request->file);
+        if ($request->avatar) {
+            app(UserService::class)->refreshAvatar($user, $request->avatar);
+        }
 
-        $this->update(['avatar' => $fileName]);
+        if ($request->banner) {
+            app(UserService::class)->refreshBanner($user, $request->banner);
+        }        
 
-        return redirect('auth.user.edit', [$id]);        
+        return \Redirect::route('auth.user.edit', ['user_id' => $id]);     
     }
 
-    public function updateBanner(UpdateUserBannerRequest $request, $id)
-    {
-        $fileName = app(UserService::class)->refreshBanner($user, $request->file);
-
-        $this->update(['banner' => $fileName]);
-
-        return redirect('auth.user.edit', [$id]);
-    }
-
-    protected function update(array $params, $id)
+    protected function update($params, $id)
     {
         $user = $this->userRepository->find($id);
 
         $user->update($params);
-
-        $user->save();
     }
 }
