@@ -31,14 +31,14 @@ class UserController extends Controller
     {
         $this->update($request->all(), $id);
 
-        return Redirect::route('auth.user.edit', ['user_id' => $id]);
+        return Redirect::route('auth.user.edit', ['user_id' => $id])->with('success', 'Success');
     }   
 
     public function updatePassword(UpdateUserPasswordRequest $request, $id)
     {
         $this->update($request->all(), $id);
 
-        return Redirect::route('auth.user.edit', ['user_id' => $id]);     
+        return Redirect::route('auth.user.edit', ['user_id' => $id])->with('success', 'Success');    
     }
 
     public function updateMedias(UpdateUserMediasRequest $request, $id)
@@ -53,7 +53,7 @@ class UserController extends Controller
             app(UserService::class)->refreshBanner($user, $request->banner);
         }        
 
-        return Redirect::route('auth.user.edit', ['user_id' => $id]);   
+        return Redirect::route('auth.user.edit', ['user_id' => $id])->with('success', 'Success');  
     }
 
     protected function update($params, $id)

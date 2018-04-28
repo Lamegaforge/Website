@@ -22,6 +22,18 @@
 <section>
 <div class="container">
     <div class="row m-t-15">
+        <div class="col-lg-12">
+        @if($errors->hasBag())
+        <div class="alert alert-danger" role="alert">
+            <strong>Oh snap!</strong> Change a few things up and try submitting again.
+        </div>
+        @endif
+        @if(Session::has('success'))
+        <div class="alert alert-success" role="alert">
+            <strong>Well done!</strong> {{Session::get('success')}}
+        </div>
+        @endif        
+        </div>
         <div class="col-lg-4 col-md-6 col-xs-12">
             <form method='post' action="{{route('auth.user.update', [$user])}}">
                 <div class="card">
@@ -31,7 +43,7 @@
                     <div class="card-block">
                         <div class="form-group">
                             <label for="exampleInputUsername1">Name</label>
-                            <div class="input-group">
+                            <div class="input-group @if($errors->first('name')) has-danger @endif">
                                 <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
                                 <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" name='name' value='{{$user->name}}'>
                             </div>
@@ -39,20 +51,20 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputUsername1">Email</label>
-                            <div class="input-group">
+                            <div class="input-group @if($errors->first('email')) has-danger @endif">
                                 <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
                                 <input type="text" class="form-control" id="exampleInputUsername1" placeholder="email" name='email' value='{{$user->email}}'>
                             </div>
                             <small id="emailHelp" class="form-text">Enter your username wich will be display on frontpage.</small>
                         </div>    
                         <div class="form-group">
-                            <div class="input-group">
+                            <div class="input-group @if($errors->first('facebook')) has-danger @endif">
                                 <span class="input-group-addon" id="basic-addon3">https://facebook.com/</span>
                                 <input type="text" class="form-control" id="basic-url" placeholder="nickname" aria-describedby="basic-addon3">
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="input-group">
+                            <div class="input-group @if($errors->first('twitter')) has-danger @endif">
                                 <span class="input-group-addon" id="basic-addon3">https://twitter.com/</span>
                                 <input type="text" class="form-control" id="basic-url" placeholder="nickname" aria-describedby="basic-addon3">
                             </div>
@@ -74,17 +86,17 @@
                     <div class="card-block">
                         <div class="form-group">
                             <label for="exampleInputUsername1">Password</label>
-                            <div class="input-group">
+                            <div class="input-group @if($errors->first('password')) has-danger @endif">
                                 <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
-                                <input type="text" class="form-control" id="exampleInputName1" placeholder="password" name='name' value=''>
+                                <input type="password" class="form-control" id="exampleInputName1" placeholder="password" name='password'>
                             </div>
                             <small id="emailHelp" class="form-text">Enter your username wich will be display on frontpage.</small>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputUsername1">Password validation</label>
-                            <div class="input-group">
+                            <div class="input-group @if($errors->first('password_confirmation')) has-danger @endif">
                                 <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
-                                <input type="text" class="form-control" id="exampleInputUsername1" placeholder="password validation" name='email' value=''>
+                                <input type="password" class="form-control" id="exampleInputUsername1" placeholder="password validation" name='password_confirmation'>
                             </div>
                             <small id="emailHelp" class="form-text">Enter your username wich will be display on frontpage.</small>
                         </div>    
@@ -108,10 +120,12 @@
                             <div class="input-group">
                                 <input class="form-control-file" id="exampleInputFile2" aria-describedby="fileHelp" type="file" name='avatar'>
                             </div>
-                            <small id="emailHelp" class="form-text">
-                                <img src='https://yakuthemes.com/gameforest/img/user/avatar-sm.jpg'>
+                            @if(app(\App\Services\UserService::class)->userHasAvatar($user))
+                            <small class="form-text">
+                                <img src="{{app(\App\Services\UserService::class)->getUserAvatarPath($user)}}">
                                 <a href=''>Supprimer image existante</a>
                             </small>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label for="exampleInputUsername1">Banniere</label>
