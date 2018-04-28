@@ -17,8 +17,8 @@ return [
         'banner' => [
             [
                 'name' => 'banner.png',
-                'sizes' => [100, 100],
+                'sizes' => [1280, 720],
             ],
-        ],                  
+        ],
     ],
 ];
