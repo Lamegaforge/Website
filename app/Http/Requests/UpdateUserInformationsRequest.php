@@ -27,7 +27,9 @@ class UpdateUserInformationsRequest extends FormRequest
 
         return [
             'name' => 'required|string|unique:users,name,' . $userId,
-            'email' => 'required|email|unique:users,email,' . $userId
+            'email' => 'required|email|unique:users,email,' . $userId,
+            'facebook' => 'string',
+            'twitter' => 'string',
         ];
     }
 }
