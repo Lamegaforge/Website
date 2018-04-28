@@ -19,6 +19,10 @@ return [
                 'name' => 'banner.png',
                 'sizes' => [1280, 720],
             ],
+            [
+                'name' => 'minified_banner.png',
+                'sizes' => [100, 56],
+            ],              
         ],
     ],
 ];
