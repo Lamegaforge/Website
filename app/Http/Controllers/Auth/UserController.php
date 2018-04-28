@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Requests\UpdateUserRequest;
-use App\Http\Requests\UpdateUserInformationsRequest;
-use App\Http\Requests\UpdateUserMediasRequest;
 use Illuminate\Http\Request;
+use App\Services\UserService;
 use App\Repositories\UserRepository;
 use App\Http\Controllers\Controller;
-use App\Services\UserService;
-
+use App\Http\Requests\UpdateUserMediasRequest;
+use App\Http\Requests\UpdateUserPasswordRequest;
+use App\Http\Requests\UpdateUserInformationsRequest;
 
 class UserController extends Controller
 {
