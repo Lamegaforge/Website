@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateUserInformationsRequest extends FormRequest
+class UpdateUserPasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +23,9 @@ class UpdateUserInformationsRequest extends FormRequest
      */
     public function rules()
     {
-        $userId = auth()->user()->id;
-
         return [
-            'name' => 'required|string|unique:users,name,' . $userId,
-            'email' => 'required|email|unique:users,email,' . $userId
+            'password' => 'required|min:6',
+            'password_confirmation' => 'required|same:password',
         ];
     }
 }
