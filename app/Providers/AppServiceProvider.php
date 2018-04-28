@@ -45,8 +45,15 @@ class AppServiceProvider extends ServiceProvider
             return with(new VideoManager(app()))->driver();
         });            
 
+        $this->app->bind(ImageService::class, function($app) {
+            return new ImageService();
+        });  
+
         $this->app->bind(UserService::class, function($app) {
-            return new UserService(new ImageService(), config('user'));
+            return new UserService(
+                app(ImageService::class), 
+                config('user')
+            );
         });  
 
         $this->app->bind(StreamService::class, function(){
