@@ -35,29 +35,59 @@ class UserService
     {
         $userFilesPath = $this->getUserFilesPath($user);
 
-        $this->createUserFilesFolder($userFilesPath);
+        $this->imageService->createFolderIfNotExist($userFilesPath);
 
         foreach ($imagesParamsList as $params) {
 
-            $params['full_path'] = $userFilesPath . DIRECTORY_SEPARATOR . $params['name'];
+            $params['full_path'] = $userFilesPath . $params['name'];
 
             $this->imageService->upload($file, $params);
         }
     }
 
-    protected function createUserFilesFolder($path)
+    public function userHasAvatar(User $user)
     {
-        if (File::exists($path)) {
-            return;
-        }
-        
-        File::makeDirectory($path);
+        $userAvatarPath = $this->getUserAvatarPath($user);
+
+        return File::exists($userAvatarPath);
     }
+
+    public function userHasBanner(User $user)
+    {
+        $userBannerPath = $this->getUserBannerPath($user);
+
+        return File::exists($userBannerPath);
+    }    
+
+    public function getUserAvatarPath(User $user)
+    {
+        $userFilesPath = $this->getUserFilesPath($user);
+
+        $config = $this->config['images']['avatar'][0];
+
+        return $userFilesPath . $config['name'];
+    }
+
+    public function getMinifiedAvatarPath(User $user)
+    {
+        $userFilesPath = $this->getUserFilesPath($user);
+
+        $config = $this->config['images']['avatar'][1];
+
+        return $userFilesPath . $config['name'];
+    }
+
+    public function getUserBannerPath(User $user)
+    {
+        $userFilesPath = $this->getUserFilesPath($user);
+
+        $config = $this->config['images']['banner'][0];
+
+        return $userFilesPath . $config['name'];
+    }   
 
     protected function getUserFilesPath(User $user)
     {
-        $path = $this->config['images']['path'];
-
-        return storage_path($path . DIRECTORY_SEPARATOR . $user->id);
-    }
+        return public_path('users' . DIRECTORY_SEPARATOR . $user->id . DIRECTORY_SEPARATOR);
+    }      
 }
