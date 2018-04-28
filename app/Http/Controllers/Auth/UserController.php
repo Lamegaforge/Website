@@ -45,6 +45,10 @@ class UserController extends Controller
     {
         $user = $this->userRepository->find($id);
 
+        if (! $request->avatar && ! $request->banner) {
+            return Redirect::route('auth.user.edit', ['user_id' => $id]);
+        }
+
         if ($request->avatar) {
             app(UserService::class)->refreshAvatar($user, $request->avatar);
         }
