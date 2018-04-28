@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Hash;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -31,4 +32,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }    
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash::make($value);
+    }
 }
