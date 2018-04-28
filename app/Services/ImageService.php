@@ -20,4 +20,13 @@ class ImageService
     {
         File::exists($path) or File::makeDirectory($path);
     }
+
+    public function destroyIfExist($path)
+    {
+        if (! File::exists($path)) {
+            return;
+        }
+
+        File::delete($path);
+    }
 }

@@ -123,7 +123,7 @@
                             @if(app(\App\Services\UserService::class)->userHasAvatar($user))
                             <small class="form-text">
                                 <img src="/users/{{$user->id}}/minified_avatar.png">
-                                <a href=''> Supprimer image existante</a>
+                                <a href="{{route('auth.user.destroy_avatar', ['user_id' => $user->id])}}"> Supprimer image existante</a>
                             </small>
                             @endif
                         </div>
@@ -135,7 +135,7 @@
                             @if(app(\App\Services\UserService::class)->userHasBanner($user))
                             <small class="form-text">
                                 <img src="/users/{{$user->id}}/minified_banner.png">
-                                <a href=''> Supprimer image existante</a>
+                                <a href="{{route('auth.user.destroy_banner', ['user_id' => $user->id])}}"> Supprimer image existante</a>
                             </small>
                             @endif                            
                         </div>

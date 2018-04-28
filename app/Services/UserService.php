@@ -86,6 +86,32 @@ class UserService
         return $userFilesPath . $config['name'];
     }   
 
+    public function destroyAvatar(User $user)
+    {
+        $config = $this->config['images']['avatar'];
+
+        $this->destroyUserFiles($user, $config);
+    }   
+
+    public function destroyBanner(User $user)
+    {
+        $config = $this->config['images']['banner'];
+
+        $this->destroyUserFiles($user, $config);        
+    }   
+
+    protected function destroyUserFiles(User $user, array $imagesParamsList)
+    {
+        $userFilesPath = $this->getUserFilesPath($user);
+
+        foreach ($imagesParamsList as $params) {
+
+            $path = $userFilesPath . $params['name'];
+
+            $this->imageService->destroyIfExist($path);
+        }
+    }
+
     protected function getUserFilesPath(User $user)
     {
         return public_path('users' . DIRECTORY_SEPARATOR . $user->id . DIRECTORY_SEPARATOR);

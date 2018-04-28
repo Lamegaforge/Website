@@ -57,8 +57,26 @@ class UserController extends Controller
             app(UserService::class)->refreshBanner($user, $request->banner);
         }        
 
-        return Redirect::route('auth.user.edit', ['user_id' => $id])->with('success', 'Success');  
+        return Redirect::route('auth.user.edit', ['user_id' => auth()->user()->id])->with('success', 'Success');  
     }
+
+    public function destroyAvatar(Request $request, $id)
+    {
+        $user = $this->userRepository->find($id);
+
+        app(UserService::class)->destroyAvatar($user);
+
+        return Redirect::route('auth.user.edit', ['user_id' => $user->id])->with('success', 'Success');
+    }
+
+    public function destroyBanner(Request $request, $id)
+    {
+        $user = $this->userRepository->find($id);
+
+        app(UserService::class)->destroyBanner($user);
+
+        return Redirect::route('auth.user.edit', ['user_id' => $user->id])->with('success', 'Success');
+    }    
 
     protected function update($params, $id)
     {
