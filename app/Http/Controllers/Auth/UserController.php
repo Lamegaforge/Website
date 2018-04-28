@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Redirect;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Repositories\UserRepository;
@@ -30,14 +31,14 @@ class UserController extends Controller
     {
         $this->update($request->all(), $id);
 
-        return \Redirect::route('auth.user.edit', ['user_id' => $id]);
+        return Redirect::route('auth.user.edit', ['user_id' => $id]);
     }   
 
     public function updatePassword(UpdateUserPasswordRequest $request, $id)
     {
         $this->update($request->all(), $id);
 
-        return redirect('auth.user.edit', [$id]);        
+        return Redirect::route('auth.user.edit', ['user_id' => $id]);     
     }
 
     public function updateMedias(UpdateUserMediasRequest $request, $id)
@@ -52,7 +53,7 @@ class UserController extends Controller
             app(UserService::class)->refreshBanner($user, $request->banner);
         }        
 
-        return \Redirect::route('auth.user.edit', ['user_id' => $id]);     
+        return Redirect::route('auth.user.edit', ['user_id' => $id]);   
     }
 
     protected function update($params, $id)
