@@ -60,13 +60,13 @@
                         <div class="form-group">
                             <div class="input-group @if($errors->first('facebook')) has-danger @endif">
                                 <span class="input-group-addon" id="basic-addon3">https://facebook.com/</span>
-                                <input type="text" class="form-control" id="basic-url" placeholder="nickname" aria-describedby="basic-addon3">
+                                <input type="text" class="form-control" id="basic-url" placeholder="nickname" name='facebook' value='{{$user->facebook}}'>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="input-group @if($errors->first('twitter')) has-danger @endif">
                                 <span class="input-group-addon" id="basic-addon3">https://twitter.com/</span>
-                                <input type="text" class="form-control" id="basic-url" placeholder="nickname" aria-describedby="basic-addon3">
+                                <input type="text" class="form-control" id="basic-url" placeholder="nickname" name='twitter' value='{{$user->twitter}}'>
                             </div>
                         </div>  
                     </div>
@@ -122,8 +122,8 @@
                             </div>
                             @if(app(\App\Services\UserService::class)->userHasAvatar($user))
                             <small class="form-text">
-                                <img src="{{app(\App\Services\UserService::class)->getUserAvatarPath($user)}}">
-                                <a href=''>Supprimer image existante</a>
+                                <img src="/users/{{$user->id}}/minified_avatar.png">
+                                <a href=''> Supprimer image existante</a>
                             </small>
                             @endif
                         </div>
@@ -132,6 +132,12 @@
                             <div class="input-group">
                                 <input class="form-control-file" id="exampleInputFile2" aria-describedby="fileHelp" type="file" name='banner'>
                             </div>
+                            @if(app(\App\Services\UserService::class)->userHasBanner($user))
+                            <small class="form-text">
+                                <img src="/users/{{$user->id}}/minified_banner.png">
+                                <a href=''> Supprimer image existante</a>
+                            </small>
+                            @endif                            
                         </div>
                     </div>
                     <div class="card-footer">
