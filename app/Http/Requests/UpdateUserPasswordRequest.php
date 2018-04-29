@@ -13,7 +13,7 @@ class UpdateUserPasswordRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->check();
+        return auth()->check() && $this->route('user_id') == auth()->user()->id;
     }
 
     /**

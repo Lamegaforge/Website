@@ -13,7 +13,7 @@ class UpdateUserMediasRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->check();
+        return auth()->check() && $this->route('user_id') == auth()->user()->id;
     }
 
     /**
@@ -24,8 +24,8 @@ class UpdateUserMediasRequest extends FormRequest
     public function rules()
     {
         return [
-            'avatar' => 'file|image:png,jpg|max:3000',
-            'banner' => 'file|image:png,jpg|max:4000',
+            'avatar' => 'file|mimes:png,jpg|max:3000',
+            'banner' => 'file|mimes:png,jpg|max:4000',
         ];
     }
 }

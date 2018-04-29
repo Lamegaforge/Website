@@ -13,7 +13,7 @@ class UpdateUserInformationsRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->check();
+        return auth()->check() && $this->route('user_id') == auth()->user()->id;
     }
 
     /**
@@ -28,8 +28,8 @@ class UpdateUserInformationsRequest extends FormRequest
         return [
             'name' => 'required|string|unique:users,name,' . $userId,
             'email' => 'required|email|unique:users,email,' . $userId,
-            'facebook' => 'string',
-            'twitter' => 'string',
+            'facebook' => 'nullable|string',
+            'twitter' => 'nullable|string',
         ];
     }
 }
