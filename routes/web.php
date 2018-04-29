@@ -29,6 +29,8 @@ Route::group(['namespace' => 'Auth', 'middleware' => ['auth'], 'prefix' => 'auth
 		Route::post('update-informations/{user_id}', 'UserController@updateInformations')->name('auth.user.update');
 		Route::post('update-password/{user_id}', 'UserController@updatePassword')->name('auth.user.update_password');
 		Route::post('update-medias/{user_id}', 'UserController@updateMedias')->name('auth.user.update_medias');
+		Route::get('destroy-avatar/{user_id}', 'UserController@destroyAvatar')->name('auth.user.destroy_avatar');
+		Route::get('destroy-banner/{user_id}', 'UserController@destroyBanner')->name('auth.user.destroy_banner');
 	});
 });
 
