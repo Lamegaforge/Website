@@ -3,9 +3,8 @@
 namespace App\Console\Commands;
 
 use Exceptions;
-use App\Models\Video;
-use App\Services\VideoService;
 use Illuminate\Console\Command;
+use App\Managers\Video\VideoManager;
 use App\Repositories\VideoRepository;
 use App\Repositories\VideoChannelRepository;
 
@@ -48,7 +47,7 @@ class CollectNewVideos extends Command
 
             try {
                 
-                $videoEntityList = app(VideoService::class)->getLastByChannelWithApi($channel->hash);
+                $videoEntityList = app(VideoManager::class)->findByChannel($channel->hash);
 
                 foreach ($videoEntityList as $videoEntity) {
 

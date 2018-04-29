@@ -3,9 +3,8 @@
 namespace App\Console\Commands;
 
 use Exception;
-use App\Models\Video;
-use App\Services\VideoService;
 use Illuminate\Console\Command;
+use App\Managers\Video\VideoManager;
 use App\Repositories\VideoRepository;
 
 class HydrateVideos extends Command
@@ -49,7 +48,7 @@ class HydrateVideos extends Command
                 
                 $params = [];
 
-                $videoEntity = app(VideoService::class)->findWithApi($video->hash);
+                $videoEntity = app(VideoManager::class)->find($video->hash);
 
                 $params['online'] = false;
 

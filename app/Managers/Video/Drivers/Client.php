@@ -10,13 +10,13 @@ use App\Managers\Video\Contracts\Driver;
 
 class Client implements Driver
 {
-    protected $config;
     protected $client;
+    protected $config;
 
-    public function __construct(array $config, $client)
+    public function __construct($client, array $config)
     {
-        $this->config = $config;
         $this->client = $client;
+        $this->config = $config;
     }
 
     public function find($hash)
@@ -32,7 +32,7 @@ class Client implements Driver
 
     public function findByChannel($hash, $limit = 50)
     {
-        $responseList = $this->client->listChannelVideos($hashChannel, $limit, 'date');
+        $responseList = $this->client->listChannelVideos($hash, $limit, 'date');
 
         if (! $responseList) {
             return null;
