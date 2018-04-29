@@ -41,33 +41,43 @@
                         <h5 class="card-title">Informations personnelles</h5>
                     </div>
                     <div class="card-block">
-                        <div class="form-group">
+                        <div class="form-group @if($errors->first('name')) has-danger @endif">
                             <label for="exampleInputUsername1">Name</label>
-                            <div class="input-group @if($errors->first('name')) has-danger @endif">
+                            <div class="input-group">
                                 <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
                                 <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" name='name' value='{{$user->name}}'>
                             </div>
-                            <small id="emailHelp" class="form-text">Enter your username wich will be display on frontpage.</small>
+                            @if($errors->first('name'))
+                                <small class="form-text">{{$errors->first('name')}}</small>
+                            @endif
                         </div>
-                        <div class="form-group">
+                        <div class="form-group @if($errors->first('email')) has-danger @endif">
                             <label for="exampleInputUsername1">Email</label>
-                            <div class="input-group @if($errors->first('email')) has-danger @endif">
+                            <div class="input-group">
                                 <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
                                 <input type="text" class="form-control" id="exampleInputUsername1" placeholder="email" name='email' value='{{$user->email}}'>
                             </div>
-                            <small id="emailHelp" class="form-text">Enter your username wich will be display on frontpage.</small>
+                            @if($errors->first('email'))
+                                <small class="form-text">{{$errors->first('email')}}</small>
+                            @endif
                         </div>    
-                        <div class="form-group">
-                            <div class="input-group @if($errors->first('facebook')) has-danger @endif">
+                        <div class="form-group @if($errors->first('facebook')) has-danger @endif">
+                            <div class="input-group">
                                 <span class="input-group-addon" id="basic-addon3">https://facebook.com/</span>
                                 <input type="text" class="form-control" id="basic-url" placeholder="nickname" name='facebook' value='{{$user->facebook}}'>
                             </div>
+                            @if($errors->first('facebook'))
+                                <small class="form-text">{{$errors->first('facebook')}}</small>
+                            @endif                            
                         </div>
-                        <div class="form-group">
-                            <div class="input-group @if($errors->first('twitter')) has-danger @endif">
+                        <div class="form-group @if($errors->first('twitter')) has-danger @endif">
+                            <div class="input-group">
                                 <span class="input-group-addon" id="basic-addon3">https://twitter.com/</span>
                                 <input type="text" class="form-control" id="basic-url" placeholder="nickname" name='twitter' value='{{$user->twitter}}'>
                             </div>
+                            @if($errors->first('twitter'))
+                                <small class="form-text">{{$errors->first('twitter')}}</small>
+                            @endif                            
                         </div>  
                     </div>
                     <div class="card-footer">
@@ -84,7 +94,7 @@
                         <h5 class="card-title">Password</h5>
                     </div>
                     <div class="card-block">
-                        <div class="form-group">
+                        <div class="form-group @if($errors->first('password')) has-danger @endif">
                             <label for="exampleInputUsername1">Password</label>
                             <div class="input-group @if($errors->first('password')) has-danger @endif">
                                 <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
@@ -92,11 +102,11 @@
                             </div>
                             <small id="emailHelp" class="form-text">Enter your username wich will be display on frontpage.</small>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputUsername1">Password validation</label>
+                        <div class="form-group @if($errors->first('password_confirmation')) has-danger @endif">
+                            <label for="exampleInputUsername1">Password confirmation</label>
                             <div class="input-group @if($errors->first('password_confirmation')) has-danger @endif">
                                 <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
-                                <input type="password" class="form-control" id="exampleInputUsername1" placeholder="password validation" name='password_confirmation'>
+                                <input type="password" class="form-control" id="exampleInputUsername1" placeholder="password confirmation" name='password_confirmation'>
                             </div>
                             <small id="emailHelp" class="form-text">Enter your username wich will be display on frontpage.</small>
                         </div>    
@@ -115,25 +125,31 @@
                         <h5 class="card-title">Medias</h5>
                     </div>
                     <div class="card-block">
-                        <div class="form-group">
+                        <div class="form-group @if($errors->first('avatar')) has-danger @endif">
                             <label for="exampleInputUsername1">Avatar</label>
                             <div class="input-group">
                                 <input class="form-control-file" id="exampleInputFile2" aria-describedby="fileHelp" type="file" name='avatar'>
                             </div>
+                            @if($errors->first('avatar'))
+                                <small class="form-text">{{$errors->first('avatar')}}</small>
+                            @endif                                
                             @if(app(\App\Services\UserService::class)->userHasAvatar($user))
-                            <small class="form-text">
+                            <small class="form-text text-muted">
                                 <img src="/users/{{$user->id}}/minified_avatar.png">
                                 <a href="{{route('auth.user.destroy_avatar', ['user_id' => $user->id])}}"> Supprimer image existante</a>
                             </small>
                             @endif
                         </div>
-                        <div class="form-group">
+                        <div class="form-group @if($errors->first('banner')) has-danger @endif">
                             <label for="exampleInputUsername1">Banniere</label>
                             <div class="input-group">
                                 <input class="form-control-file" id="exampleInputFile2" aria-describedby="fileHelp" type="file" name='banner'>
                             </div>
+                            @if($errors->first('banner'))
+                                <small class="form-text">{{$errors->first('banner')}}</small>
+                            @endif                                
                             @if(app(\App\Services\UserService::class)->userHasBanner($user))
-                            <small class="form-text">
+                            <small class="form-text text-muted">
                                 <img src="/users/{{$user->id}}/minified_banner.png">
                                 <a href="{{route('auth.user.destroy_banner', ['user_id' => $user->id])}}"> Supprimer image existante</a>
                             </small>

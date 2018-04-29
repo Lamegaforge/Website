@@ -18,10 +18,10 @@
             @if(auth()->check())
             <ul>
               <li class="dropdown dropdown-profile">
-                <a href="login.html" data-toggle="dropdown"><img src="img/user/avatar-sm.jpg" alt=""> <span>{{auth()->user()->name}}</span></a>
+                <a href="login.html" data-toggle="dropdown">@include('layouts.partials.avatar') <span>{{auth()->user()->name}}</span></a>
                 <div class="dropdown-menu dropdown-menu-right">
                   <a class="dropdown-item active" href="#"><i class="fa fa-user"></i> Profile</a>
-                  <a class="dropdown-item" href="#"><i class="fa fa-cog"></i> Settings</a>
+                  <a class="dropdown-item" href="{{ route('auth.user.edit', [auth()->user()]) }}"><i class="fa fa-cog"></i> Settings</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="{{ route('logout') }}" 
                       onclick="event.preventDefault(); 
