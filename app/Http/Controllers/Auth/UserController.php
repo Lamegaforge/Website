@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Redirect;
+use Illuminate\Http\Request;
+use App\Services\UserService;
 use App\Repositories\UserRepository;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\UpdateUserMediasRequest;
+use App\Http\Requests\UpdateUserPasswordRequest;
+use App\Http\Requests\UpdateUserInformationsRequest;
 
 class UserController extends Controller
 {
@@ -15,51 +20,68 @@ class UserController extends Controller
         $this->userRepository = $userRepository;
     }
 
-    public function edit(UpdateUserRequest $request, $id)
+    public function edit(Request $request, $id)
     {
         $user = $this->userRepository->find($id);
 
-        return view('auth.user.edit', [$id]);
+        return view('auth.user.edit', ['user' => $user]);
     } 
 
     public function updateInformations(UpdateUserInformationsRequest $request, $id)
     {
-        $this->update($request->all());
+        $this->update($request->all(), $id);
 
-        return redirect('auth.user.edit', [$id]);
+        return Redirect::route('auth.user.edit', ['user_id' => $id])->with('success', 'Success');
     }   
 
     public function updatePassword(UpdateUserPasswordRequest $request, $id)
     {
-        $this->update($request->all());
+        $this->update($request->all(), $id);
 
-        return redirect('auth.user.edit', [$id]);        
+        return Redirect::route('auth.user.edit', ['user_id' => $id])->with('success', 'Success');    
     }
 
-    public function updateAvatar(UpdateUserAvatarRequest $request, $id)
+    public function updateMedias(UpdateUserMediasRequest $request, $id)
     {
-        $fileName = app(UserService::class)->upload($request->file);
+        $user = $this->userRepository->find($id);
 
-        $this->update(['avatar' => $fileName]);
+        if (! $request->avatar && ! $request->banner) {
+            return Redirect::route('auth.user.edit', ['user_id' => $id]);
+        }
 
-        return redirect('auth.user.edit', [$id]);        
+        if ($request->avatar) {
+            app(UserService::class)->refreshAvatar($user, $request->avatar);
+        }
+
+        if ($request->banner) {
+            app(UserService::class)->refreshBanner($user, $request->banner);
+        }        
+
+        return Redirect::route('auth.user.edit', ['user_id' => auth()->user()->id])->with('success', 'Success');  
     }
 
-    public function updateBanner(UpdateUserBannerRequest $request, $id)
+    public function destroyAvatar(Request $request, $id)
     {
-        $fileName = app(UserService::class)->upload($request->file);
+        $user = $this->userRepository->find($id);
 
-        $this->update(['banner' => $fileName]);
+        app(UserService::class)->destroyAvatar($user);
 
-        return redirect('auth.user.edit', [$id]);        
+        return Redirect::route('auth.user.edit', ['user_id' => $user->id])->with('success', 'Success');
     }
 
-    protected function update(array $params, $id)
+    public function destroyBanner(Request $request, $id)
+    {
+        $user = $this->userRepository->find($id);
+
+        app(UserService::class)->destroyBanner($user);
+
+        return Redirect::route('auth.user.edit', ['user_id' => $user->id])->with('success', 'Success');
+    }    
+
+    protected function update($params, $id)
     {
         $user = $this->userRepository->find($id);
 
         $user->update($params);
-
-        $user->save();        
     }
 }

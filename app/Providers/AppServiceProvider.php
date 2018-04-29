@@ -3,7 +3,10 @@
 namespace App\Providers;
 
 use Cache;
+use Image;
 use GuzzleHttp\Client;
+use App\Services\UserService;
+use App\Services\ImageService;
 use App\Services\StreamService;
 use App\Managers\Video\VideoManager;
 use App\Repositories\StreamRepository;
@@ -41,6 +44,17 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(VideoManager::class, function($app) {
             return with(new VideoManager(app()))->driver();
         });            
+
+        $this->app->bind(ImageService::class, function($app) {
+            return new ImageService();
+        });  
+
+        $this->app->bind(UserService::class, function($app) {
+            return new UserService(
+                app(ImageService::class), 
+                config('user')
+            );
+        });  
 
         $this->app->bind(StreamService::class, function(){
             return new StreamService(
