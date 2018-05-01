@@ -24,8 +24,8 @@ class UpdateUserMediasRequest extends FormRequest
     public function rules()
     {
         return [
-            'avatar' => 'file|mimes:png,jpg|max:3000',
-            'banner' => 'file|mimes:png,jpg|max:4000',
+            'avatar' => 'file|mimes:png,jpg,gif|max:3000',
+            'banner' => 'file|mimes:png,jpg,gif|max:4000',
         ];
     }
 }
