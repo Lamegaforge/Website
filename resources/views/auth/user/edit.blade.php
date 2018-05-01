@@ -1,20 +1,22 @@
 @extends('layouts.base')
 
-@section('breadcrumbs')
-  <section class="bg-primary">
+@section('highlight')
+<section class="bg-primary">
     <div class="container">
-      <h3 class="text-white font-weight-300 m-b-0">Modification du compte</h3>
+        <h3 class="text-white font-weight-300 m-b-0">Modification du compte</h3>
     </div>
-  </section>
+</section>
+@endsection
 
+@section('breadcrumbs')
 <section class="breadcrumbs">
-<div class="container">
-  <ol class="breadcrumb">
-    <li><a href="/">Home</a></li>
-    <li><a href="/">User</a></li>
-    <li class="active">edit</li>
-  </ol>
-</div>
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="/">Home</a></li>
+            <li><a href="/">User</a></li>
+            <li class="active">edit</li>
+        </ol>
+    </div>
 </section>
 @endsection
 

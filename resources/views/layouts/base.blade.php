@@ -25,6 +25,7 @@
   <!-- /header -->
 
   <!-- main -->
+  @yield('highlight')
   @yield('breadcrumbs')
   @yield('content')
   <!-- /main -->
