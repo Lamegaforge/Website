@@ -1,5 +1,9 @@
 @extends('layouts.base')
 
+@section('styles')
+<link href="plugins/owl-carousel/css/owl.carousel.min.css" rel="stylesheet">
+@endsection
+
 @section('breadcrumbs')
     <section class="breadcrumbs">
         <div class="container">

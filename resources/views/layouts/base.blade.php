@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Gameforest - Gaming Theme HTML</title>
+  <title>LAMEGAFORGE</title>
   <!-- vendor css -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
   <link rel="stylesheet" href="/plugins/font-awesome/css/font-awesome.min.css">
@@ -15,9 +15,7 @@
   <link rel="stylesheet" href="/css/theme.min.css">
   <link rel="stylesheet" href="/css/custom.css">
   <!-- plugins css -->
-  <link href="plugins/owl-carousel/css/owl.carousel.min.css" rel="stylesheet">  
-<!--
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
+  @yield('styles')
 </head>
 <body class="fixed-header">
   <!-- header -->
@@ -91,9 +89,7 @@
   <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
 
   <!-- theme js -->
-  @yield('scripts')
   <script src="/js/theme.min.js"></script>
-<!--   <script src="{{ asset('js/app.js') }}"></script>
- -->
+  @yield('scripts')
 </body>
 </html>
