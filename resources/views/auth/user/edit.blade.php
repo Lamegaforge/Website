@@ -102,7 +102,9 @@
                                 <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
                                 <input type="password" class="form-control" id="exampleInputName1" placeholder="password" name='password'>
                             </div>
-                            <small id="emailHelp" class="form-text">Enter your username wich will be display on frontpage.</small>
+                            @if($errors->first('password'))
+                                <small class="form-text">{{$errors->first('password')}}</small>
+                            @endif                            
                         </div>
                         <div class="form-group @if($errors->first('password_confirmation')) has-danger @endif">
                             <label for="exampleInputUsername1">Password confirmation</label>
@@ -110,7 +112,9 @@
                                 <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
                                 <input type="password" class="form-control" id="exampleInputUsername1" placeholder="password confirmation" name='password_confirmation'>
                             </div>
-                            <small id="emailHelp" class="form-text">Enter your username wich will be display on frontpage.</small>
+                            @if($errors->first('password_confirmation'))
+                                <small class="form-text">{{$errors->first('password_confirmation')}}</small>
+                            @endif   
                         </div>    
                     </div>
                     <div class="card-footer">
