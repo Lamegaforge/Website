@@ -225,7 +225,7 @@
               	@foreach($randomVideos as $randomVideo)
                 <li>
                   <div class="widget-img">
-                    <a href="blog-post.html"><img src="https://i1.ytimg.com/vi/{{$randomVideo->hash}}/mqdefault.jpg" alt=""></a>
+                    <a href="{{route('video.show', [$randomVideo])}}"><img src="https://i1.ytimg.com/vi/{{$randomVideo->hash}}/mqdefault.jpg" alt=""></a>
                     <span>{{$randomVideo->duration}}</span>
                   </div>
                   <h4><a href="blog-post.html">{{$randomVideo->title}}</a></h4>
