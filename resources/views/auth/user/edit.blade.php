@@ -13,7 +13,7 @@
     <div class="container">
         <ol class="breadcrumb">
             <li><a href="/">Home</a></li>
-            <li><a href="/">User</a></li>
+            <li><a href="{{route('user.show', [$user])}}">User</a></li>
             <li class="active">edit</li>
         </ol>
     </div>
@@ -23,6 +23,8 @@
 @section('content') 
 <section>
 <div class="container">
+    <h5>Édition de l'utilisateur</h5>
+    <p>Ici tu peux éditer tout ce qui concerne ton compte, évite d'upload du cul stp.</p>
     <div class="row m-t-15">
         <div class="col-lg-12">
         @if($errors->hasBag())
@@ -142,7 +144,7 @@
                             @if(app(\App\Services\UserService::class)->userHasAvatar($user))
                             <small class="form-text text-muted">
                                 <img src="/users/{{$user->id}}/minified_avatar.png">
-                                <a href="{{route('auth.user.destroy_avatar', ['user_id' => $user->id])}}"> Supprimer image existante</a>
+                                <a href="{{route('auth.user.destroy_avatar', ['user_id' => $user->id])}}"> Supprimer avatar</a>
                             </small>
                             @endif
                         </div>
@@ -157,7 +159,7 @@
                             @if(app(\App\Services\UserService::class)->userHasBanner($user))
                             <small class="form-text text-muted">
                                 <img src="/users/{{$user->id}}/minified_banner.png">
-                                <a href="{{route('auth.user.destroy_banner', ['user_id' => $user->id])}}"> Supprimer image existante</a>
+                                <a href="{{route('auth.user.destroy_banner', ['user_id' => $user->id])}}"> Supprimer banniere</a>
                             </small>
                             @endif                            
                         </div>
@@ -173,7 +175,3 @@
 </div>
 </section>
 @endsection  
-
-@section('scripts')
-
-@endsection
