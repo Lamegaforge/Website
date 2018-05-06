@@ -17,7 +17,7 @@ class UserController extends Controller
 
     public function show(Request $request, $id)
     {
-        $user = $this->userRepository->all($id);
+        $user = $this->userRepository->find($id);
 
         return view('guest.user.show', [
             'user' => $user, 
