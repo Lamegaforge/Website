@@ -17,5 +17,6 @@ class MockSeeder extends Seeder
            
         $this->call(PostsTableSeeder::class);
         $this->call(VideosTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
     }
 }
